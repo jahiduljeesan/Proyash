@@ -23,7 +23,7 @@ import com.dev.jahid.proyash.databinding.FragmentDataBinding;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DataFragment extends Fragment implements AppData.AppDataCallback {
+public class DataFragment extends Fragment{
 
     private FragmentDataBinding binding;
     private List<ItemsModel> itemsList;
@@ -49,24 +49,12 @@ public class DataFragment extends Fragment implements AppData.AppDataCallback {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        AppData appData = AppData.getAppData();
-        appData.setAppDataCallback(this);
-        binding.progressCircular.setVisibility(View.VISIBLE);
+        //AppData appData = AppData.getAppData();
+        //appData.setAppDataCallback(this);
+        //binding.progressCircular.setVisibility(View.VISIBLE);
         binding.dataListView.setLayoutManager(new LinearLayoutManager(requireContext()));
         itemAdapter = new ItemAdapter(requireContext(),itemsList);
         binding.dataListView.setAdapter(itemAdapter);
         binding.progressCircular.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void displayData(Boolean isDataLoaded) {
-        if (isDataLoaded) {
-            Log.d("isDataLoadedCheck","Data is loaded");
-            binding.dataListView.setLayoutManager(new LinearLayoutManager(requireContext()));
-            itemAdapter = new ItemAdapter(requireContext(),itemsList);
-            binding.dataListView.setAdapter(itemAdapter);
-            binding.progressCircular.setVisibility(View.GONE);
-            Log.d("isDataLoadedCheck2","Data is loaded");
-        }
     }
 }

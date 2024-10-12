@@ -1,5 +1,6 @@
 package com.dev.jahid.proyash.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -19,10 +20,12 @@ import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements AppData.AppDataCallback{
 
     private FragmentHomeBinding binding;
     private AppData appData;
+    ViewpagerAdapter viewpagerAdapter;
+    ArrayList<DataFragment> fragmentsList = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,7 +43,13 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        //initializing app data
         appData = AppData.getAppData();
+        //initializing callback interface
+        appData.setAppDataCallback(this);
+        //view
+       viewpagerAdapter = new ViewpagerAdapter(getActivity().getSupportFragmentManager(),fragmentsList);
         binding.appbar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
@@ -60,12 +69,9 @@ public class HomeFragment extends Fragment {
                 }
             }
         });
-
-        initFragments();
     }
 
     private void initFragments() {
-        ArrayList<DataFragment> fragmentsList = new ArrayList<>();
 
         DataFragment all = new DataFragment(appData.allList);
         DataFragment abp = new DataFragment(appData.abpList);
@@ -88,7 +94,6 @@ public class HomeFragment extends Fragment {
         fragmentsList.add(abp);
         fragmentsList.add(abn);
 
-        ViewpagerAdapter viewpagerAdapter = new ViewpagerAdapter(requireActivity().getSupportFragmentManager(),fragmentsList);
         binding.dataFragmentContainer.setAdapter(viewpagerAdapter);
 
         binding.dataFragmentContainer.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -122,5 +127,13 @@ public class HomeFragment extends Fragment {
 
             }
         });
+    }
+
+    @Override
+    public void displayData(Boolean isDataLoaded) {
+        isDataLoaded = true;
+        if (isDataLoaded) {
+            initFragments();
+        }
     }
 }
