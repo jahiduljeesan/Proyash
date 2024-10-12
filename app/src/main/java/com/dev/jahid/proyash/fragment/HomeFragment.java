@@ -20,7 +20,7 @@ import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 
-public class HomeFragment extends Fragment implements AppData.AppDataCallback{
+public class HomeFragment extends Fragment{
 
     private FragmentHomeBinding binding;
     private AppData appData;
@@ -47,9 +47,6 @@ public class HomeFragment extends Fragment implements AppData.AppDataCallback{
         //initializing app data
         appData = AppData.getAppData();
         //initializing callback interface
-        appData.setAppDataCallback(this);
-        //view
-       viewpagerAdapter = new ViewpagerAdapter(getActivity().getSupportFragmentManager(),fragmentsList);
         binding.appbar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
@@ -94,6 +91,7 @@ public class HomeFragment extends Fragment implements AppData.AppDataCallback{
         fragmentsList.add(abp);
         fragmentsList.add(abn);
 
+        viewpagerAdapter = new ViewpagerAdapter(getActivity().getSupportFragmentManager(),fragmentsList);
         binding.dataFragmentContainer.setAdapter(viewpagerAdapter);
 
         binding.dataFragmentContainer.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -127,13 +125,6 @@ public class HomeFragment extends Fragment implements AppData.AppDataCallback{
 
             }
         });
-    }
-
-    @Override
-    public void displayData(Boolean isDataLoaded) {
-        isDataLoaded = true;
-        if (isDataLoaded) {
-            initFragments();
-        }
+        initFragments();
     }
 }

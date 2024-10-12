@@ -30,8 +30,6 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-
         replaceFragment(new HomeFragment());
 
         binding.bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
