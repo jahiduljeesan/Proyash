@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "99085627019",
+    "project_id": "proyash-342af",
+    "storage_bucket": "proyash-342af.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:99085627019:android:a35520eb2cc90f73f86e8e",
+        "android_client_info": {
+          "package_name": "com.dev.jahid.proyash"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVzkgk7Nr_WWTfpVqjE93XDM9CfASCp2Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

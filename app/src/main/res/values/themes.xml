@@ -1,0 +1,19 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Proyash" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="colorPrimary">@color/primary_color</item>
+    </style>
+
+    <style name="navIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color"> @color/primary_color</item>
+    </style>
+
+    <style name="castomSearchView" parent="Widget.AppCompat.SearchView">
+        <item name="android:textColorHint"> @color/black </item>
+        <item name="android:textColor">@color/black</item>
+        <item name="searchIcon">@drawable/search_icon</item>
+    </style>
+
+    <style name="Theme.Proyash" parent="Base.Theme.Proyash" />
+</resources>
