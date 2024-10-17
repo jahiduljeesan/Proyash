@@ -29,27 +29,16 @@
                 android:layout_height="match_parent"
                 android:background="@color/primary_color">
 
-                <LinearLayout
-                    android:layout_width="102dp"
-                    android:layout_height="102dp"
-                    android:background="@drawable/logo_bg"
-                    android:gravity="center"
-                    android:padding="10dp"
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:src="@drawable/proyash_image"
+                    android:scaleType="fitXY"
+                    android:padding="0dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/textView4"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.5">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/alinur"
-                        android:text="প্রয়াস'২০"
-                        android:textAlignment="center"
-                        android:textColor="@color/primary_color"
-                        android:textSize="25sp" />
-                </LinearLayout>
+                    app:layout_constraintTop_toTopOf="parent"/>
 
                 <TextView
                     android:id="@+id/textView4"
@@ -81,7 +70,7 @@
                         android:id="@+id/searchView"
                         style="@style/castomSearchView"
                         android:layout_width="290dp"
-                        android:layout_height="48dp"
+                        android:layout_height="40dp"
                         android:layout_marginLeft="20dp"
                         android:background="@drawable/searchbar_bg"
                         app:iconifiedByDefault="false"
@@ -90,17 +79,43 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:queryHint="এখানে খুজুন..." />
 
-                    <ImageView
-                        android:id="@+id/imageView"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:layout_marginStart="16dp"
-                        android:src="@drawable/favorite"
+<!--                    <LinearLayout-->
+<!--                        android:paddingBottom="6dp"-->
+<!--                        android:paddingTop="6dp"-->
+<!--                        android:id="@+id/proyashLogo"-->
+<!--                        android:layout_width="50dp"-->
+<!--                        android:layout_height="50dp"-->
+<!--                        android:background="@drawable/logo_bg"-->
+<!--                        android:gravity="center"-->
+<!--                        android:padding="10dp"-->
+<!--                        android:layout_margin="4dp"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintStart_toEndOf="@+id/searchView"-->
+<!--                        app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:text="'২০"-->
+<!--                            android:textAlignment="center"-->
+<!--                            android:textColor="@color/primary_color"-->
+<!--                            android:fontFamily="@font/alinur"-->
+<!--                            android:textSize="20sp"/>-->
+<!--                    </LinearLayout>-->
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/animationView"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_margin="4dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/searchView"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.5"
-                        app:tint="@color/white" />
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="true"
+                        android:layout_marginTop="-10dp"
+                        app:lottie_rawRes="@raw/animation2" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -110,27 +125,44 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/homeNestedLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="5dp"
+        android:layout_height="wrap_content"
+        android:minHeight="790dp"
+        android:paddingTop="14dp"
         android:background="@drawable/home_view_bg"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/homeConstraintLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:minHeight="600dp">
+            android:background="@drawable/home_view_bg"
+            android:minHeight="700dp">
+
+<!--            <TextView-->
+<!--                android:id="@+id/tvBloodGroup"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/blood_group_text"-->
+<!--                android:textAlignment="center"-->
+<!--                android:fontFamily="@font/alinur"-->
+<!--                android:textSize="22dp"-->
+<!--                android:textColor="@color/primary_color"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent"/>-->
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:background="@color/white"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                >
 
                 <com.google.android.material.tabs.TabItem
                     android:layout_width="wrap_content"

@@ -1,6 +1,10 @@
 package com.dev.jahid.proyash.database;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,14 +34,20 @@ public class AppData {
 
     AppDataCallback appDataCallback;
 
+    Context context;
 
-    public AppData() {
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
+
+
+    public AppData(Context context) {
+        this.context = context;
         initAppData();
     }
 
-    public static AppData getAppData() {
+    public static AppData getAppData(Context context) {
         if (appData == null) {
-            appData = new AppData();
+            appData = new AppData(context);
         }
         return appData;
     }
@@ -48,18 +58,28 @@ public class AppData {
 
 
     private void initAppData() {
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("DonorData");
+        Log.d("Jahidul","Jahidul islam8");
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        firebaseDatabase.setPersistenceEnabled(true);
+        databaseReference = firebaseDatabase.getReference("DonorData");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                clearAllList();
+                Log.d("Jahidul","Jahidul islam1");
+                if (haveNetwork(context)) {
+                    Log.d("Jahidul","Jahidul islam2");
+                    clearAllList();
+                }
                 for (DataSnapshot dataSnapshot: snapshot.getChildren()) {
+                    Log.d("Jahidul","Jahidul islam3");
                     ItemsModel itemsModel =  dataSnapshot.getValue(ItemsModel.class);
                     allList.add(itemsModel);
                     String group = itemsModel.getGroup();
                     setData(group,itemsModel);
+                    Log.d("Jahidul1","Jahidul islam4");
                 }
                 appDataCallback.displayData(true);
+                Log.d("Jahidul1","Jahidul islam5");
             }
 
             @Override
@@ -70,6 +90,7 @@ public class AppData {
     }
 
     private void clearAllList() {
+        Log.d("Jahidul","Jahidul islam6");
         allList.clear();
         apList.clear();
         anList.clear();
@@ -101,8 +122,16 @@ public class AppData {
             case "O-" : onList.add(itemsModel);
                 break;
         }
+        Log.d("Jahidul","Jahidul islam7");
     }
     public interface AppDataCallback {
         void displayData(Boolean isDataLoaded);
     }
+    private boolean haveNetwork(Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+
+        return networkInfo != null && networkInfo.isConnected();
+    }
+
 }

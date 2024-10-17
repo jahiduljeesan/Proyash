@@ -5,9 +5,11 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,8 +26,8 @@ public class HomeFragment extends Fragment{
 
     private FragmentHomeBinding binding;
     private AppData appData;
-    ViewpagerAdapter viewpagerAdapter;
-    ArrayList<DataFragment> fragmentsList = new ArrayList<>();
+    private ViewpagerAdapter viewpagerAdapter;
+    private DataFragment activeFragment;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,9 +45,12 @@ public class HomeFragment extends Fragment{
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         //initializing app data
-        appData = AppData.getAppData();
+        appData = AppData.getAppData(requireContext());
+        Log.d("opSize",appData.opList.size()+"");
+        Log.d("onSize",appData.onList.size()+"");
+
+
         //initializing callback interface
         binding.appbar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
@@ -55,20 +60,39 @@ public class HomeFragment extends Fragment{
                 if (Math.abs(verticalOffset) == totalScrollRange) {
                     //Collapsed
                     binding.toolbar.setVisibility(View.VISIBLE);
+                    binding.tabLayout.setPadding(0,74,0,0);
+                    binding.homeNestedLayout.setPadding(0,70,0,0);
                 }
                 else if (verticalOffset == 0) {
                     //Fully expended
                     binding.toolbar.setVisibility(View.INVISIBLE);
+                    binding.tabLayout.setPadding(0,0,0,0);
                 }
                 else {
                     //Somewhere in between
                     binding.toolbar.setVisibility(View.INVISIBLE);
+                    //Hello my name is jahidul islam jisan
                 }
+            }
+        });
+        initFragments();
+        //search view
+        binding.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                activeFragment.getSearch(newText);
+                return true;
             }
         });
     }
 
     private void initFragments() {
+        ArrayList<DataFragment> fragmentsList = new ArrayList<>();
 
         DataFragment all = new DataFragment(appData.allList);
         DataFragment abp = new DataFragment(appData.abpList);
@@ -79,6 +103,8 @@ public class HomeFragment extends Fragment{
         DataFragment bn = new DataFragment(appData.bnList);
         DataFragment op = new DataFragment(appData.opList);
         DataFragment on = new DataFragment(appData.onList);
+
+        activeFragment = all;
 
         //adding objets to the fragments list;
         fragmentsList.add(all);
@@ -102,6 +128,7 @@ public class HomeFragment extends Fragment{
             @Override
             public void onPageSelected(int position) {
                 binding.tabLayout.selectTab(binding.tabLayout.getTabAt(position));
+                activeFragment = fragmentsList.get(position);
             }
 
             @Override
@@ -113,6 +140,7 @@ public class HomeFragment extends Fragment{
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 binding.dataFragmentContainer.setCurrentItem(tab.getPosition());
+                activeFragment = fragmentsList.get(tab.getPosition());
             }
 
             @Override
@@ -125,6 +153,5 @@ public class HomeFragment extends Fragment{
 
             }
         });
-        initFragments();
     }
 }

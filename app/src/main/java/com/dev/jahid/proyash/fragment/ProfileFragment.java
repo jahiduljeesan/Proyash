@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dev.jahid.proyash.R;
+import com.dev.jahid.proyash.activity.AboutActivity;
 import com.dev.jahid.proyash.activity.LoginActivity;
 import com.dev.jahid.proyash.databinding.FragmentProfileBinding;
 
@@ -41,5 +42,23 @@ public class ProfileFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        binding.btnInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setIntent("info");
+            }
+        });
+        binding.btnAboutApp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setIntent("about");
+            }
+        });
+    }
+    private void setIntent(String tag) {
+        Intent intent = new Intent(requireActivity(), AboutActivity.class);
+        intent.putExtra("fragment_tag",tag);
+        startActivity(intent);
     }
 }

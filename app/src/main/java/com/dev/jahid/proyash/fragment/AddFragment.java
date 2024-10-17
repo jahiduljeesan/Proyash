@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.dev.jahid.proyash.R;
+import com.dev.jahid.proyash.database.AppData;
 import com.dev.jahid.proyash.database.ItemsModel;
 import com.dev.jahid.proyash.databinding.FragmentAddBinding;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -26,8 +27,10 @@ public class AddFragment extends Fragment {
 
     private FragmentAddBinding binding;
     String[] blood_group_list,union_list;
-    String name = "",phone = "",union = "",village= "",group= "";
+    String name = "",phone = "",gender = "",union = "",village= "",group= "",user="Unknown";
+    FirebaseDatabase firebaseDatabase;
     DatabaseReference dbReference;
+    AppData appData;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,9 @@ public class AddFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        appData = AppData.getAppData(requireContext());
+
+        binding.spnGender.setAdapter(new ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.gender_list)));
         binding.spnUnion.setAdapter(new ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.union_list)));
         binding.spnGroup.setAdapter(new ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.blood_group_list)));
 
@@ -59,8 +65,10 @@ public class AddFragment extends Fragment {
                 progressDialog.setCancelable(false);
                 progressDialog.show();
 
-                ItemsModel itemsModel = new ItemsModel(name,phone,union,village,group);
-                dbReference = FirebaseDatabase.getInstance().getReference("DonorData");
+                firebaseDatabase = FirebaseDatabase.getInstance();
+                dbReference = firebaseDatabase.getReference("DonorData");
+                ItemsModel itemsModel = new ItemsModel(name,phone,gender,union,village,group,user);
+
                 String id = dbReference.push().getKey();
                 dbReference.child(id).setValue(itemsModel).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -75,8 +83,15 @@ public class AddFragment extends Fragment {
                         Toast.makeText(requireContext(), "তথ্য আপডেট ব্যার্থ হয়েছে।", Toast.LENGTH_SHORT).show();
                     }
                 });
+                clearAll();
             }
         });
+    }
+
+    private void clearAll() {
+        binding.etName.setText(null);
+        binding.etVillage.setText(null);
+        binding.etPhone.setText(null);
     }
 
     private boolean getData() {
@@ -86,28 +101,33 @@ public class AddFragment extends Fragment {
             return false;
         }
         phone = binding.etPhone.getText().toString();
+
         if (phone.isEmpty()) {
             binding.etPhoneLayout.setError("অনুগ্রহ করে ফোন নম্বর প্রবেশ করুন!");
             return false;
         }
+        gender = binding.spnGender.getText().toString();
+
         union = binding.spnUnion.getText().toString();
-        if (phone.isEmpty()) {
-            binding.spnUnionLayout.setError("অনুগ্রহ করে প্রবেশ করুন!");
-            return false;
-        }
 
         village = binding.etVillage.getText().toString();
         if (phone.isEmpty()) {
             binding.etVillageLayout.setError("অনুগ্রহ করে গ্রামের নাম প্রবেশ করুন!");
             return false;
         }
+
         group = binding.spnGroup.getText().toString();
-        if (phone.isEmpty()) {
-            binding.spnGroupLayout.setError("অনুগ্রহ করে প্রবেশ করুন!");
-            return false;
-        }
 
         return true;
+    }
+
+    private boolean matchPhoneNumber(String target){
+        for (ItemsModel model : AppData.appData.allList) {
+            if (target.equals(model.getPhone())) {
+                return true;
+            }
+        }
+        return false;
     }
 
 

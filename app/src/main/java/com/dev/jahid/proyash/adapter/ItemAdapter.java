@@ -19,10 +19,12 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemHoder> {
 
     private Context context;
     private List<ItemsModel> itemsList;
+    private OnItemClick onItemClick;
 
-    public ItemAdapter(Context context, List<ItemsModel> itemsList) {
+    public ItemAdapter(Context context, List<ItemsModel> itemsList,OnItemClick onItemClick) {
         this.context = context;
         this.itemsList = itemsList;
+        this.onItemClick = onItemClick;
     }
 
     @NonNull
@@ -37,12 +39,31 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemHoder> {
         setData(holder,position);
     }
 
+    public void setFilteredList(List<ItemsModel> filteredList) {
+        this.itemsList = filteredList;
+        notifyDataSetChanged();
+    }
+
     private void setData(@NonNull ItemAdapter.ItemHoder holder, int position) {
         ItemsModel itemPosition = itemsList.get(position);
+
+        if (itemPosition.getGender().equals("পুরুষ")) {
+            holder.itemImage.setImageDrawable(context.getDrawable(R.drawable.men_icon));
+
+        } else if (itemPosition.getGender().equals("মহিলা")) {
+            holder.itemImage.setImageDrawable(context.getDrawable(R.drawable.women_icon));
+        }
 
         holder.tvName.setText(itemPosition.getName());
         holder.tvAddress.setText(itemPosition.getVillage()+","+itemPosition.getUnion());
         holder.tvGroup.setText(itemPosition.getGroup());
+
+        holder.btnCall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemClick.setOnCallButtonClick(itemPosition.getPhone(),holder.getAdapterPosition());
+            }
+        });
     }
 
     @Override
@@ -54,6 +75,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemHoder> {
 
         ImageView btnCall;
         TextView tvName,tvAddress,tvGroup;
+        ImageView itemImage;
 
         public ItemHoder(@NonNull View itemView) {
             super(itemView);
@@ -61,6 +83,10 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemHoder> {
             tvName = itemView.findViewById(R.id.tvName);
             tvAddress = itemView.findViewById(R.id.tvAddress);
             tvGroup = itemView.findViewById(R.id.tvGroup);
+            itemImage = itemView.findViewById(R.id.itemImage);
         }
+    }
+    public interface OnItemClick{
+        void setOnCallButtonClick(String phoneNumber,int position);
     }
 }

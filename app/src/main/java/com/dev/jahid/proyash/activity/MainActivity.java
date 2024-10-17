@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         }
         else {
             if (isPressed){
+                finish();
                 super.onBackPressed();
                 return;
             }

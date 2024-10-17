@@ -16,6 +16,15 @@
     <string name="donor_text"><u>ডোনার ফর্ম</u></string>
     <string name="sign_up"><u>Sign Up</u></string>
     <string name="log_in"><u>Log In</u></string>
+    <string name="blood_group_text"><u>রক্তের গ্রুপ</u></string>
+    <string name="tv_developer_info"><u>ডেভেলপার ইনফো</u></string>
+    <string name="facebook_com_ochien"><u>facebook.com/ochien</u></string>
+    <string name="facebook_com_foysal"><u>facebook.com/foysal_ahmed</u></string>
+
+    <string-array name="gender_list">
+        <item>পুরুষ</item>
+        <item>মহিলা</item>
+    </string-array>
 
     <string-array name="union_list">
         <item>রণোগোপালদী</item>
@@ -34,8 +43,8 @@
         <item>A-</item>
         <item>B+</item>
         <item>B-</item>
-        <item>0+</item>
-        <item>0-</item>
+        <item>O+</item>
+        <item>O-</item>
     </string-array>
 
 </resources>
