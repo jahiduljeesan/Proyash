@@ -14,6 +14,7 @@ import com.dev.jahid.proyash.R;
 import com.dev.jahid.proyash.databinding.ActivityMainBinding;
 import com.dev.jahid.proyash.fragment.AddFragment;
 import com.dev.jahid.proyash.fragment.HomeFragment;
+import com.dev.jahid.proyash.fragment.PostFragment;
 import com.dev.jahid.proyash.fragment.ProfileFragment;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.database.FirebaseDatabase;
@@ -40,11 +41,11 @@ public class MainActivity extends AppCompatActivity {
                 if (itemId == R.id.navHome) replaceFragment(new HomeFragment());
                 if (itemId == R.id.navList) replaceFragment(new AddFragment());
                 if (itemId == R.id.navProfile) replaceFragment(new ProfileFragment());
+                if (itemId == R.id.navRequest) replaceFragment(new PostFragment());
 
                 return true;
             }
         });
-
     }
     private void replaceFragment(Fragment fragment) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();

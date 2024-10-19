@@ -5,6 +5,9 @@
         android:icon="@drawable/home_icon"
         android:id="@+id/navHome"
         />
+    <item android:title="Request"
+        android:icon="@drawable/post_icon"
+        android:id="@+id/navRequest"/>
     <item android:title="Donor"
         android:icon="@drawable/list_icon"
         android:id="@+id/navList"

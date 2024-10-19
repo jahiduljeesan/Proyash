@@ -29,6 +29,9 @@ public class SplashActivity extends AppCompatActivity{
         binding = ActivitySplashBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        startActivity(new Intent(SplashActivity.this,MainActivity.class));
+        finish();
+
         //Full screen activity
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         appData = AppData.getAppData(this);
