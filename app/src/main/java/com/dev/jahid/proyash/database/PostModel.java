@@ -1,9 +1,9 @@
 package com.dev.jahid.proyash.database;
 
 public class PostModel {
-    private String postPersonName,postGroup,postPatientType,postLocation,postDescription,phoneNumber1,phoneNumber2;
+    private String postPersonName,postGroup,postPatientType,postLocation,postDescription,phoneNumber1,phoneNumber2,date,userEmail;
 
-    public PostModel(String postPersonName, String postGroup, String postPatientType, String postLocation, String postDescription, String phoneNumber1, String phoneNumber2) {
+    public PostModel(String postPersonName, String postGroup, String postPatientType, String postLocation, String postDescription, String phoneNumber1, String phoneNumber2, String date, String userEmail) {
         this.postPersonName = postPersonName;
         this.postGroup = postGroup;
         this.postPatientType = postPatientType;
@@ -11,9 +11,8 @@ public class PostModel {
         this.postDescription = postDescription;
         this.phoneNumber1 = phoneNumber1;
         this.phoneNumber2 = phoneNumber2;
-    }
-
-    public PostModel() {
+        this.date = date;
+        this.userEmail = userEmail;
     }
 
     public String getPostPersonName() {
@@ -71,4 +70,24 @@ public class PostModel {
     public void setPhoneNumber2(String phoneNumber2) {
         this.phoneNumber2 = phoneNumber2;
     }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+    public PostModel() {
+    }
+
 }

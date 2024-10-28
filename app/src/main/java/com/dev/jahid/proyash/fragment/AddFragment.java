@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.dev.jahid.proyash.R;
 import com.dev.jahid.proyash.database.AppData;
 import com.dev.jahid.proyash.database.ItemsModel;
+import com.dev.jahid.proyash.database.UserAuthentication;
 import com.dev.jahid.proyash.databinding.FragmentAddBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -28,6 +29,7 @@ public class AddFragment extends Fragment {
     private FragmentAddBinding binding;
     String[] blood_group_list,union_list;
     String name = "",phone = "",gender = "",union = "",village= "",group= "",user="Unknown";
+    boolean forEveryone = false;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference dbReference;
     AppData appData;
@@ -67,7 +69,7 @@ public class AddFragment extends Fragment {
 
                 firebaseDatabase = FirebaseDatabase.getInstance();
                 dbReference = firebaseDatabase.getReference("DonorData");
-                ItemsModel itemsModel = new ItemsModel(name,phone,gender,union,village,group,user);
+                ItemsModel itemsModel = new ItemsModel(name,phone,gender,union,village,group,user,forEveryone);
 
                 String id = dbReference.push().getKey();
                 dbReference.child(id).setValue(itemsModel).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -111,10 +113,12 @@ public class AddFragment extends Fragment {
         union = binding.spnUnion.getText().toString();
 
         village = binding.etVillage.getText().toString();
-        if (phone.isEmpty()) {
+        if (village.isEmpty()) {
             binding.etVillageLayout.setError("অনুগ্রহ করে গ্রামের নাম প্রবেশ করুন!");
             return false;
         }
+
+        forEveryone = UserAuthentication.isAdmin;
 
         group = binding.spnGroup.getText().toString();
 

@@ -21,13 +21,13 @@
 
         <TextView
             android:id="@+id/btnBack"
-            android:layout_width="391dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/kohinur"
             android:text="অ্যাপ ইনফো"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="30dp"
+            android:textSize="@dimen/_22sdp"
             android:textStyle="bold" />
 
     </androidx.cardview.widget.CardView>
@@ -54,10 +54,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/titleCard" >
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:src="@drawable/proyash_logo"/>
 
     </androidx.cardview.widget.CardView>
 
@@ -72,208 +68,286 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imageCard">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/imageView3"
-                android:layout_width="140dp"
-                android:layout_height="140dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginLeft="10dp"
-                android:src="@drawable/profile_imgae"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/kohinur"
-                android:text="মোঃ জাহিদুল ইসলাম"
-                android:textSize="25dp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/imageView3"
-                app:layout_constraintTop_toTopOf="@+id/imageView3" />
-
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:fontFamily="@font/kohinur"
-                android:text="ব্যাচঃ প্রয়াস ২০২০"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/textView2"
-                app:layout_constraintStart_toStartOf="@+id/textView2"
-                app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-            <ImageView
-                android:id="@+id/btnJahidFb"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:src="@drawable/facebook_icon"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-                app:layout_constraintEnd_toStartOf="@+id/btnJahidLi"
-                app:layout_constraintStart_toEndOf="@+id/imageView3"
-                app:layout_constraintStart_toStartOf="@+id/textView2"
-                app:layout_constraintTop_toBottomOf="@+id/textView5" />
-
-            <ImageView
-                android:id="@+id/btnJahidLi"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_marginStart="8dp"
-                android:src="@drawable/linkedin_icon"
-                app:layout_constraintBottom_toBottomOf="@+id/btnJahidFb"
-                app:layout_constraintEnd_toStartOf="@+id/btnJahidGh"
-                app:layout_constraintStart_toEndOf="@+id/btnJahidFb"
-                app:layout_constraintTop_toTopOf="@+id/btnJahidFb" />
-
-            <ImageView
-                android:id="@+id/btnJahidGh"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_marginStart="8dp"
-                android:src="@drawable/github_icon"
-                app:layout_constraintBottom_toBottomOf="@+id/btnJahidLi"
-                app:layout_constraintEnd_toStartOf="@+id/btnJahidMail"
-                app:layout_constraintStart_toEndOf="@+id/btnJahidLi"
-                app:layout_constraintTop_toTopOf="@+id/btnJahidLi" />
-
-            <ImageView
-                android:id="@+id/btnJahidMail"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_marginStart="8dp"
-                android:src="@drawable/gmail_icon"
-                app:layout_constraintBottom_toBottomOf="@+id/btnJahidGh"
-                app:layout_constraintEnd_toEndOf="@id/textView2"
-                app:layout_constraintStart_toEndOf="@+id/btnJahidGh"
-                app:layout_constraintTop_toTopOf="@+id/btnJahidGh" />
-
-            <TextView
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:text="All rights reserved by the owner"
-                android:textAlignment="center"
-                android:textStyle="italic"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/circleImageView2"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="20dp"
-                android:src="@drawable/ochien_image"
-                app:layout_constraintStart_toStartOf="@+id/imageView3"
-                app:layout_constraintTop_toBottomOf="@+id/view2" />
-
-            <View
-                android:id="@+id/view2"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:background="@color/black"
-                android:layout_marginStart="30dp"
-                android:layout_marginEnd="30dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView3" />
-
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:layout_marginStart="8dp"
-                android:text="ওয়াবাশশিরিল মোমেনিন (অচিন)"
-                android:textAlignment="center"
-                android:textSize="16dp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/circleImageView2"
-                app:layout_constraintTop_toTopOf="@+id/circleImageView2" />
+                android:layout_height="match_parent"
+                android:minHeight="700dp"
+                android:scrollbarAlwaysDrawHorizontalTrack="false">
 
 
-            <TextView
-                android:id="@+id/textView7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Facebook: "
-                android:textAlignment="center"
-                android:textSize="16dp"
-                app:layout_constraintStart_toStartOf="@+id/textView6"
-                app:layout_constraintTop_toBottomOf="@+id/textView6" />
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="@dimen/_115sdp"
+                    android:layout_height="@dimen/_115sdp"
+                    android:layout_marginLeft="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:src="@drawable/profile_imgae"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/btnOchienFb"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/facebook_com_ochien"
-                android:textAlignment="center"
-                android:textColor="#0C51CF"
-                android:textSize="16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView7"
-                app:layout_constraintStart_toEndOf="@+id/textView7"
-                app:layout_constraintTop_toBottomOf="@+id/textView6" />
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:fontFamily="@font/kohinur"
+                    android:text="মোঃ জাহিদুল ইসলাম"
+                    android:textSize="@dimen/_20sdp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imageView3"
+                    app:layout_constraintTop_toTopOf="@+id/imageView3" />
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/circleImageView"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="20dp"
-                android:src="@drawable/foysal_image"
-                app:layout_constraintStart_toStartOf="@+id/circleImageView2"
-                app:layout_constraintTop_toBottomOf="@+id/circleImageView2" />
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:fontFamily="@font/kohinur"
+                    android:text="ব্যাচঃ প্রয়াস ২০২০"
+                    android:textSize="@dimen/_15sdp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/textView2"
+                    app:layout_constraintStart_toStartOf="@+id/textView2"
+                    app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+                <ImageView
+                    android:id="@+id/btnJahidFb"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:src="@drawable/facebook_icon"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+                    app:layout_constraintEnd_toStartOf="@+id/btnJahidLi"
+                    app:layout_constraintStart_toEndOf="@+id/imageView3"
+                    app:layout_constraintStart_toStartOf="@+id/textView2"
+                    app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+                <ImageView
+                    android:id="@+id/btnJahidLi"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_marginStart="8dp"
+                    android:elevation="4dp"
+                    android:src="@drawable/linkedin_icon"
+                    app:layout_constraintBottom_toBottomOf="@+id/btnJahidFb"
+                    app:layout_constraintEnd_toStartOf="@+id/btnJahidGh"
+                    app:layout_constraintStart_toEndOf="@+id/btnJahidFb"
+                    app:layout_constraintTop_toTopOf="@+id/btnJahidFb" />
+
+                <ImageView
+                    android:id="@+id/btnJahidGh"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_marginStart="8dp"
+                    android:elevation="4dp"
+                    android:src="@drawable/github_icon"
+                    app:layout_constraintBottom_toBottomOf="@+id/btnJahidLi"
+                    app:layout_constraintEnd_toStartOf="@+id/btnJahidMail"
+                    app:layout_constraintStart_toEndOf="@+id/btnJahidLi"
+                    app:layout_constraintTop_toTopOf="@+id/btnJahidLi" />
+
+                <ImageView
+                    android:id="@+id/btnJahidMail"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_marginStart="8dp"
+                    android:elevation="4dp"
+                    android:src="@drawable/gmail_icon"
+                    app:layout_constraintBottom_toBottomOf="@+id/btnJahidGh"
+                    app:layout_constraintEnd_toEndOf="@id/textView2"
+                    app:layout_constraintStart_toEndOf="@+id/btnJahidGh"
+                    app:layout_constraintTop_toTopOf="@+id/btnJahidGh" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="All rights reserved by the owner"
+                    android:textAlignment="center"
+                    android:textStyle="italic"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <View
+                    android:id="@+id/view2"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/kohinur"
+                    android:padding="@dimen/_10sdp"
+                    android:text="@string/developer_thaughts"
+                    android:textAlignment="textStart"
+                    android:textSize="@dimen/_16sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view2" />
+
+                <!--            <View-->
+                <!--                android:id="@+id/view3"-->
+                <!--                android:layout_width="0dp"-->
+                <!--                android:layout_height="1dp"-->
+                <!--                android:layout_marginBottom="20dp"-->
+                <!--                android:background="@color/black"-->
+                <!--                app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                app:layout_constraintStart_toStartOf="parent"-->
+                <!--                app:layout_constraintTop_toBottomOf="@+id/textView4" />-->
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="সহযোগিতায়:"
+                    android:textAlignment="center"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/imgOchien"
+                    android:layout_width="@dimen/_55sdp"
+                    android:layout_height="@dimen/_55sdp"
+                    app:cardCornerRadius="@dimen/_11sdp"
+                    app:layout_constraintEnd_toStartOf="@+id/imgShakil"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView8">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ochien_image" />
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="অচিন"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/imgOchien"
+                    app:layout_constraintStart_toStartOf="@id/imgOchien"
+                    app:layout_constraintTop_toBottomOf="@+id/imgOchien" />
 
 
-            <TextView
-                android:id="@+id/textView9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:layout_marginStart="8dp"
-                android:text="ফয়সাল আহমেদ"
-                android:textAlignment="center"
-                android:textSize="16dp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/circleImageView"
-                app:layout_constraintTop_toTopOf="@+id/circleImageView" />
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/imgShakil"
+                    android:layout_width="@dimen/_55sdp"
+                    android:layout_height="@dimen/_55sdp"
+                    app:cardCornerRadius="@dimen/_11sdp"
+                    app:layout_constraintBottom_toBottomOf="@+id/imgOchien"
+                    app:layout_constraintEnd_toStartOf="@+id/imgRakib"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/imgOchien"
+                    app:layout_constraintTop_toTopOf="@+id/imgOchien">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ochien_image" />
+                </androidx.cardview.widget.CardView>
 
 
-            <TextView
-                android:id="@+id/textView12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Facebook: "
-                android:textAlignment="center"
-                android:textSize="16dp"
-                app:layout_constraintStart_toStartOf="@+id/textView9"
-                app:layout_constraintTop_toBottomOf="@+id/textView9" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="শাকিল"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/imgShakil"
+                    app:layout_constraintStart_toStartOf="@id/imgShakil"
+                    app:layout_constraintTop_toBottomOf="@+id/imgShakil" />
 
-            <TextView
-                android:id="@+id/btnFoysalFb"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/facebook_com_foysal"
-                android:textAlignment="center"
-                android:textColor="#0C51CF"
-                android:textSize="16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView12"
-                app:layout_constraintStart_toEndOf="@+id/textView12"
-                app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/imgRakib"
+                    android:layout_width="@dimen/_55sdp"
+                    android:layout_height="@dimen/_55sdp"
+                    app:cardCornerRadius="@dimen/_11sdp"
+                    app:layout_constraintBottom_toBottomOf="@+id/imgShakil"
+                    app:layout_constraintEnd_toStartOf="@+id/imgFoysal"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/imgShakil"
+                    app:layout_constraintTop_toTopOf="@+id/imgShakil">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ochien_image" />
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="রাকিব"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/imgRakib"
+                    app:layout_constraintStart_toStartOf="@id/imgRakib"
+                    app:layout_constraintTop_toBottomOf="@+id/imgRakib" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/imgFoysal"
+                    android:layout_width="@dimen/_55sdp"
+                    android:layout_height="@dimen/_55sdp"
+                    app:cardCornerRadius="@dimen/_11sdp"
+                    app:layout_constraintBottom_toBottomOf="@+id/imgRakib"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/imgRakib"
+                    app:layout_constraintTop_toTopOf="@+id/imgRakib">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/foysal_image" />
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ফয়সাল"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/imgFoysal"
+                    app:layout_constraintStart_toStartOf="@id/imgFoysal"
+                    app:layout_constraintTop_toBottomOf="@+id/imgFoysal" />
+
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline24"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent=".03" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline25"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent=".90" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
 
 
     </androidx.cardview.widget.CardView>

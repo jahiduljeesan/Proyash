@@ -2,8 +2,9 @@ package com.dev.jahid.proyash.database;
 
 public class ItemsModel {
     private String name,phone,gender,union,village,group,username;
+    private boolean forEveryone;
 
-    public ItemsModel(String name, String phone, String gender, String union, String village, String group, String username) {
+    public ItemsModel(String name, String phone, String gender, String union, String village, String group, String username, boolean forEveryone) {
         this.name = name;
         this.phone = phone;
         this.gender = gender;
@@ -11,10 +12,18 @@ public class ItemsModel {
         this.village = village;
         this.group = group;
         this.username = username;
+        this.forEveryone = forEveryone;
     }
 
     public ItemsModel() {
+    }
 
+    public boolean isForEveryone() {
+        return forEveryone;
+    }
+
+    public void setForEveryone(boolean forEveryone) {
+        this.forEveryone = forEveryone;
     }
 
     public String getName() {

@@ -43,9 +43,13 @@ dependencies {
     implementation(libs.activity)
     implementation(libs.constraintlayout)
     implementation(libs.firebase.database)
+    implementation(libs.firebase.messaging)
+    implementation(libs.firebase.auth)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     implementation ("com.airbnb.android:lottie:3.4.0")
     implementation ("de.hdodenhof:circleimageview:3.1.0")
+    implementation ("com.intuit.sdp:sdp-android:1.1.1")
+    implementation ("androidx.work:work-runtime:2.8.1")
 }

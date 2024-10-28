@@ -1,5 +1,6 @@
 package com.dev.jahid.proyash.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MenuItem;
@@ -16,6 +17,7 @@ import com.dev.jahid.proyash.fragment.AddFragment;
 import com.dev.jahid.proyash.fragment.HomeFragment;
 import com.dev.jahid.proyash.fragment.PostFragment;
 import com.dev.jahid.proyash.fragment.ProfileFragment;
+import com.dev.jahid.proyash.services.FirebaseServices;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -30,6 +32,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        // Start the Firebase monitoring service
+        Intent serviceIntent = new Intent(this, FirebaseServices.class);
+        startService(serviceIntent);
 
         replaceFragment(new HomeFragment());
 
@@ -47,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
     private void replaceFragment(Fragment fragment) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.homeFragmentContainer,fragment);

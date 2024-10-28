@@ -6,5 +6,6 @@
     <color name="primary_color">#DC143C</color>
     <color name="ash">#E4E4E4</color>
     <color name="nav_indicator_color">#D1DC143C</color>
-    <color name="color_transparent">#E70707</color>
+    <color name="color_transparent">#87E70707</color>
+    <color name="transparent">#00E70707</color>
 </resources>

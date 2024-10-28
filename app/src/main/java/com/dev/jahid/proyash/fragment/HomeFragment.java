@@ -71,7 +71,6 @@ public class HomeFragment extends Fragment{
                 else {
                     //Somewhere in between
                     binding.toolbar.setVisibility(View.INVISIBLE);
-                    //Hello my name is jahidul islam jisan
                 }
             }
         });

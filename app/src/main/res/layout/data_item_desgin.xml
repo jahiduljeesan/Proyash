@@ -3,8 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:padding="4dp"
-    android:layout_height="100dp">
+    android:id="@+id/donorItems"
+    android:layout_margin="@dimen/_1sdp"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground"
+    android:layout_height="@dimen/_70sdp">
 
 <!--    <com.airbnb.lottie.LottieAnimationView-->
 <!--        android:id="@+id/circleImageView"-->
@@ -20,11 +23,11 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/itemImage"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginStart="8dp"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:layout_marginBottom="@dimen/_12sdp"
+        android:layout_marginStart="@dimen/_6sdp"
         android:background="@drawable/circle_image_bg"
         android:src="@drawable/men_icon"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -46,12 +49,12 @@
         android:id="@+id/tvName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginStart="@dimen/_6sdp"
+        android:layout_marginTop="@dimen/_10sdp"
         android:fontFamily="@font/kohinur"
         android:maxLength="22"
         android:text="মোঃ জাহিদুল ইসলাম"
-        android:textSize="18dp"
+        android:textSize="@dimen/_13sdp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/itemImage"
         app:layout_constraintTop_toTopOf="parent" />

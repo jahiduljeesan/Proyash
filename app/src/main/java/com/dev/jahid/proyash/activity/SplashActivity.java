@@ -16,7 +16,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.dev.jahid.proyash.R;
 import com.dev.jahid.proyash.database.AppData;
+import com.dev.jahid.proyash.database.UserAuthentication;
 import com.dev.jahid.proyash.databinding.ActivitySplashBinding;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SplashActivity extends AppCompatActivity{
 
@@ -29,14 +31,12 @@ public class SplashActivity extends AppCompatActivity{
         binding = ActivitySplashBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        startActivity(new Intent(SplashActivity.this,MainActivity.class));
-        finish();
-
         //Full screen activity
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         appData = AppData.getAppData(this);
 
-//        if (!haveNetwork(this)) {
+
+//        if (haveNetwork(this)) {
 //            new Handler(getMainLooper()).postDelayed(new Runnable() {
 //                @Override
 //                public void run() {
@@ -53,9 +53,18 @@ public class SplashActivity extends AppCompatActivity{
             public void displayData(Boolean isDataLoaded) {
                 Log.d("isDataLoaded",isDataLoaded+"");
                 if (isDataLoaded) {
-                    startActivity(new Intent(SplashActivity.this,MainActivity.class));
-                    finish();
+                    startApp();
                 }
+            }
+        });
+    }
+
+    void startApp() {
+        new UserAuthentication(new UserAuthentication.IsAuthenticate() {
+            @Override
+            public void setIsAuthenticate(boolean isAdmin) {
+                startActivity(new Intent(SplashActivity.this,MainActivity.class));
+                finish();
             }
         });
     }
@@ -65,5 +74,4 @@ public class SplashActivity extends AppCompatActivity{
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
         return networkInfo != null && networkInfo.isConnected();
     }
-
 }

@@ -42,12 +42,14 @@ public class AppData {
 
     public AppData(Context context) {
         this.context = context;
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         initAppData();
     }
 
     public static AppData getAppData(Context context) {
         if (appData == null) {
             appData = new AppData(context);
+
         }
         return appData;
     }
@@ -58,28 +60,21 @@ public class AppData {
 
 
     private void initAppData() {
-        Log.d("Jahidul","Jahidul islam8");
         firebaseDatabase = FirebaseDatabase.getInstance();
-        firebaseDatabase.setPersistenceEnabled(true);
         databaseReference = firebaseDatabase.getReference("DonorData");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d("Jahidul","Jahidul islam1");
                 if (haveNetwork(context)) {
-                    Log.d("Jahidul","Jahidul islam2");
                     clearAllList();
                 }
                 for (DataSnapshot dataSnapshot: snapshot.getChildren()) {
-                    Log.d("Jahidul","Jahidul islam3");
                     ItemsModel itemsModel =  dataSnapshot.getValue(ItemsModel.class);
                     allList.add(itemsModel);
                     String group = itemsModel.getGroup();
                     setData(group,itemsModel);
-                    Log.d("Jahidul1","Jahidul islam4");
                 }
                 appDataCallback.displayData(true);
-                Log.d("Jahidul1","Jahidul islam5");
             }
 
             @Override

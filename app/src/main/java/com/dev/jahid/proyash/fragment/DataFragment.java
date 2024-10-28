@@ -39,6 +39,9 @@ public class DataFragment extends Fragment{
     public DataFragment(List<ItemsModel> itemsModels) {
         this.itemsList = itemsModels;
     }
+    public DataFragment() {
+
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -84,7 +87,7 @@ public class DataFragment extends Fragment{
                 filteredList.add(itemsModel);
 
             }
-            if (filteredList != null && !filteredList.isEmpty()) {
+            if (!filteredList.isEmpty()) {
                 itemAdapter.setFilteredList(filteredList);
             }
         }
