@@ -1,7 +1,9 @@
 package com.dev.jahid.proyash.activity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -70,6 +72,31 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 parseLogin();
+            }
+        });
+        binding.btnResetPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!resetPassword()) return;
+                Toast.makeText(LoginActivity.this, "অনুগ্রহ করে অপেক্ষা করুন।", Toast.LENGTH_SHORT).show();
+                FirebaseAuth.getInstance().sendPasswordResetEmail(email)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                new AlertDialog.Builder(LoginActivity.this).setIcon(R.drawable.proyash_logo)
+                                        .setTitle("প্রয়াস২০")
+                                        .setMessage("আপনার পাসওয়ার্ড রেজিস্টারকৃত ইমেইলে পাঠানো হয়ছে। সেখান থেকে চেক করে সেট করে নিন।")
+                                        .setPositiveButton("ওকে", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                dialog.dismiss();
+                                            }
+                                        })
+                                        .create().show();
+
+
+                            }
+                        });
             }
         });
     }
@@ -149,17 +176,18 @@ public class LoginActivity extends AppCompatActivity {
         return true;
     }
 
-    private void resetPassword() {
+    private boolean resetPassword() {
         email = binding.etEmail.getText().toString();
 
         if(email.isEmpty()){
             binding.etEmailLayout.setError("ইমেইল প্রবেশ করুন!");
-            return;
+            return false;
         }
         if (!validEmail(email)) {
             binding.etEmailLayout.setError("ইমেইল সঠিক নয়!");
-            return;
+            return false;
         }
+        return true;
     }
 
     private boolean validEmail(@NonNull String email) {

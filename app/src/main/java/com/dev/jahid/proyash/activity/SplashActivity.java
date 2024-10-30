@@ -18,6 +18,7 @@ import com.dev.jahid.proyash.R;
 import com.dev.jahid.proyash.database.AppData;
 import com.dev.jahid.proyash.database.UserAuthentication;
 import com.dev.jahid.proyash.databinding.ActivitySplashBinding;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class SplashActivity extends AppCompatActivity{
@@ -48,15 +49,28 @@ public class SplashActivity extends AppCompatActivity{
 //        else {
 //
 //        }
-        appData.setAppDataCallback(new AppData.AppDataCallback() {
-            @Override
-            public void displayData(Boolean isDataLoaded) {
-                Log.d("isDataLoaded",isDataLoaded+"");
-                if (isDataLoaded) {
-                    startApp();
+        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+            appData.setAppDataCallback(new AppData.AppDataCallback() {
+                @Override
+                public void displayData(Boolean isDataLoaded) {
+                    Log.d("isDataLoaded",isDataLoaded+"");
+                    if (isDataLoaded) {
+                        startActivity(new Intent(SplashActivity.this,MainActivity.class));
+                        finish();
+                    }
                 }
-            }
-        });
+            });
+        }else {
+            appData.setAppDataCallback(new AppData.AppDataCallback() {
+                @Override
+                public void displayData(Boolean isDataLoaded) {
+                    Log.d("isDataLoaded",isDataLoaded+"");
+                    if (isDataLoaded) {
+                        startApp();
+                    }
+                }
+            });
+        }
     }
 
     void startApp() {

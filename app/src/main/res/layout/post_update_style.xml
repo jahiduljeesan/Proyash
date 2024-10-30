@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".activity.PostAddActivity">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -63,7 +59,7 @@
             app:layout_constraintTop_toBottomOf="@+id/btnDismiss" >
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/postPhone1"
+                android:id="@+id/updatePhone1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="phone"
@@ -91,7 +87,7 @@
             app:layout_constraintTop_toBottomOf="@+id/postPhoneLayout1" >
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/postPhone2"
+                android:id="@+id/updatePhone2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="phone"
@@ -115,7 +111,7 @@
             app:layout_constraintTop_toBottomOf="@+id/postPhoneLayout2">
 
             <AutoCompleteTextView
-                android:id="@+id/postGroup"
+                android:id="@+id/updateGroup"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="none"
@@ -139,7 +135,7 @@
             app:layout_constraintTop_toBottomOf="@+id/postGroupLayout" >
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/postLocation"
+                android:id="@+id/updateLocation"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="textPostalAddress"
@@ -163,7 +159,7 @@
             app:layout_constraintTop_toBottomOf="@+id/postLocationLayout" >
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/postPatientType"
+                android:id="@+id/updatePatientType"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="textPostalAddress"
@@ -190,7 +186,7 @@
             app:layout_constraintTop_toBottomOf="@+id/postPatientTypeLayout" >
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/postDescription"
+                android:id="@+id/updateDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:maxLength="101"
@@ -199,7 +195,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/btnPostSubmit"
+            android:id="@+id/btnPostUpdate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="সাবমিট করুন"

@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.dev.jahid.proyash.R;
 import com.dev.jahid.proyash.activity.AboutActivity;
 import com.dev.jahid.proyash.activity.LoginActivity;
+import com.dev.jahid.proyash.adapter.PostAdapter;
 import com.dev.jahid.proyash.database.UserAuthentication;
 import com.dev.jahid.proyash.databinding.FragmentProfileBinding;
 import com.google.firebase.auth.FirebaseAuth;
@@ -115,6 +116,10 @@ public class ProfileFragment extends Fragment {
                 SharedPreferences.Editor editor = userSharedPrefs.edit();
                 editor.clear();
                 editor.apply();
+
+                ProfileFragment.firstTime = true;
+                PostAdapter.firstTime = true;
+                UserAuthentication.isAdmin = false;
 
                 requireActivity().onBackPressed();
                 Toast.makeText(requireContext(), "লগ আউট সফল হয়েছে!", Toast.LENGTH_SHORT).show();

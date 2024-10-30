@@ -1,6 +1,9 @@
 package com.dev.jahid.proyash.fragment;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,12 +17,15 @@ import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.dev.jahid.proyash.R;
+import com.dev.jahid.proyash.activity.LoginActivity;
+import com.dev.jahid.proyash.activity.SignupActivity;
 import com.dev.jahid.proyash.database.AppData;
 import com.dev.jahid.proyash.database.ItemsModel;
 import com.dev.jahid.proyash.database.UserAuthentication;
 import com.dev.jahid.proyash.databinding.FragmentAddBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -59,6 +65,10 @@ public class AddFragment extends Fragment {
         binding.btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!isLoggedIn()) {
+                    showAlertDialog();
+                    return;
+                }
                 if (!getData()) return;
 
                 ProgressDialog progressDialog = new ProgressDialog(requireContext());
@@ -69,9 +79,10 @@ public class AddFragment extends Fragment {
 
                 firebaseDatabase = FirebaseDatabase.getInstance();
                 dbReference = firebaseDatabase.getReference("DonorData");
-                ItemsModel itemsModel = new ItemsModel(name,phone,gender,union,village,group,user,forEveryone);
 
                 String id = dbReference.push().getKey();
+                ItemsModel itemsModel = new ItemsModel(id,name,phone,gender,union,village,group,user,forEveryone);
+
                 dbReference.child(id).setValue(itemsModel).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
@@ -87,6 +98,7 @@ public class AddFragment extends Fragment {
                 });
                 clearAll();
             }
+
         });
     }
 
@@ -132,6 +144,38 @@ public class AddFragment extends Fragment {
             }
         }
         return false;
+    }
+
+    private void showAlertDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setTitle("প্রয়াস ২০");
+        builder.setIcon(R.drawable.proyash_logo);
+        builder.setMessage("অনুগ্রহ করে লগইন করুন!");
+
+        builder.setPositiveButton("লগইন", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                startActivity(new Intent(getActivity(), LoginActivity.class));
+            }
+        });
+        builder.setNegativeButton("পরে", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.setNeutralButton("সাইন আপ", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                startActivity(new Intent(getActivity(), SignupActivity.class));
+            }
+        });
+        builder.create();
+        builder.show();
+    }
+
+    private boolean isLoggedIn() {
+        return FirebaseAuth.getInstance().getCurrentUser() != null;
     }
 
 

@@ -66,7 +66,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:cardCornerRadius="16dp"
         app:cardElevation="2dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
@@ -113,7 +113,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etName"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_40sdp"
+                        android:layout_height="match_parent"
                         android:inputType="textPersonName"
                         android:maxLength="22"
                         android:hint="রক্তদাতার নাম"/>
@@ -142,7 +142,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etPhone"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_40sdp"
+                        android:layout_height="match_parent"
                         android:inputType="phone"
                         android:maxLength="11"
                         android:hint="মোবাইল নাম্বার"/>
@@ -166,7 +166,7 @@
                     <AutoCompleteTextView
                         android:id="@+id/spnGender"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_40sdp"
+                        android:layout_height="match_parent"
                         android:inputType="none"
                         android:text="পুরুষ"/>
 
@@ -190,7 +190,7 @@
                     <AutoCompleteTextView
                         android:id="@+id/spnUnion"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_40sdp"
+                        android:layout_height="match_parent"
                         android:inputType="none"
                         android:text="দশমিনা"/>
 
@@ -214,7 +214,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etVillage"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_40sdp"
+                        android:layout_height="match_parent"
                         android:inputType="textPostalAddress"
                         android:hint="বর্তমান ঠিকানা"/>
 
@@ -238,7 +238,7 @@
                     <AutoCompleteTextView
                         android:id="@+id/spnGroup"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_40sdp"
+                        android:layout_height="match_parent"
                         android:inputType="none"
                         android:text="AB+"/>
 

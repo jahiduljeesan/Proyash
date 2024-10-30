@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.dev.jahid.proyash.R;
 import com.dev.jahid.proyash.database.PostModel;
 import com.dev.jahid.proyash.databinding.ActivityPostAddBinding;
+import com.dev.jahid.proyash.fragment.PostFragment;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -71,13 +72,13 @@ public class PostAddActivity extends AppCompatActivity {
                 SharedPreferences userSharedPrefs = getSharedPreferences("com.dev.jahid.proyash.userdata", Context.MODE_PRIVATE);
                 email = userSharedPrefs.getString("userEmail","");
 
-                PostModel postModel = new PostModel(postPersonName,postGroup,postPatientType,postLocation,postDescription,phoneNumber1,phoneNumber2,date,email);
+                PostModel postModel = new PostModel(key,postPersonName,postGroup,postPatientType,postLocation,postDescription,phoneNumber1,phoneNumber2,date,email);
 
                 postReference.child(key).setValue(postModel).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
                         if (progressDialog.isShowing()) progressDialog.dismiss();
-                        finish();
+                        startActivity(new Intent(PostAddActivity.this, PostFragment.class));
                         Toast.makeText(PostAddActivity.this, "পোস্ট করা হয়েছে", Toast.LENGTH_SHORT).show();
                     }
                 }).addOnFailureListener(new OnFailureListener() {

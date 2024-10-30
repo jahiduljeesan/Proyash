@@ -1,10 +1,11 @@
 package com.dev.jahid.proyash.database;
 
 public class ItemsModel {
-    private String name,phone,gender,union,village,group,username;
+    private String id,name,phone,gender,union,village,group,username;
     private boolean forEveryone;
 
-    public ItemsModel(String name, String phone, String gender, String union, String village, String group, String username, boolean forEveryone) {
+    public ItemsModel(String id, String name, String phone, String gender, String union, String village, String group, String username, boolean forEveryone) {
+        this.id = id;
         this.name = name;
         this.phone = phone;
         this.gender = gender;
@@ -16,6 +17,14 @@ public class ItemsModel {
     }
 
     public ItemsModel() {
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public boolean isForEveryone() {

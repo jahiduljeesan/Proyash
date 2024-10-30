@@ -1,9 +1,10 @@
 package com.dev.jahid.proyash.database;
 
 public class PostModel {
-    private String postPersonName,postGroup,postPatientType,postLocation,postDescription,phoneNumber1,phoneNumber2,date,userEmail;
+    private String id,postPersonName,postGroup,postPatientType,postLocation,postDescription,phoneNumber1,phoneNumber2,date,userEmail;
 
-    public PostModel(String postPersonName, String postGroup, String postPatientType, String postLocation, String postDescription, String phoneNumber1, String phoneNumber2, String date, String userEmail) {
+    public PostModel(String id, String postPersonName, String postGroup, String postPatientType, String postLocation, String postDescription, String phoneNumber1, String phoneNumber2, String date, String userEmail) {
+        this.id = id;
         this.postPersonName = postPersonName;
         this.postGroup = postGroup;
         this.postPatientType = postPatientType;
@@ -17,6 +18,14 @@ public class PostModel {
 
     public String getPostPersonName() {
         return postPersonName;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public void setPostPersonName(String postPersonName) {

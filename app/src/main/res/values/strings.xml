@@ -15,6 +15,7 @@
 
     <string name="donor_text"><u>ডোনার ফর্ম</u></string>
     <string name="sign_up"><u>সাইন আপ করুন  </u></string>
+    <string name="reset_pass"><u>রিসেট করুন</u></string>
     <string name="log_in"><u>লগ ইন করুন</u></string>
     <string name="blood_group_text"><u>রক্তের গ্রুপ</u></string>
     <string name="tv_developer_info"><u>ডেভেলপার ইনফো</u></string>

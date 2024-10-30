@@ -1,13 +1,16 @@
 package com.dev.jahid.proyash.adapter;
 
+import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,7 +22,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.dev.jahid.proyash.R;
 import com.dev.jahid.proyash.database.PostModel;
 import com.dev.jahid.proyash.database.UserAuthentication;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
@@ -28,12 +36,14 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostHolder> {
     private List<PostModel> postList;
     private OnButtonClick onButtonClick;
     public static boolean firstTime = true;
+    private DatabaseReference postReference;
 
 
     public PostAdapter(Context context, List<PostModel> postList, OnButtonClick onButtonClick) {
         this.context = context;
         this.postList = postList;
         this.onButtonClick = onButtonClick;
+        this.postReference = FirebaseDatabase.getInstance().getReference("PostData");
     }
 
     @NonNull
@@ -48,18 +58,19 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostHolder> {
 
         PostModel postPosition = postList.get(position);
 
+
+        if (postPosition.getPostDescription().isEmpty()) holder.postDescription.setVisibility(View.GONE);
+        if (postPosition.getPhoneNumber2().isEmpty()){
+            holder.btnCall2.setVisibility(View.INVISIBLE);
+            holder.postContactNumber2.setVisibility(View.INVISIBLE);
+        }
+
         if (FirebaseAuth.getInstance().getCurrentUser() != null) {
             parseAdmin(holder);
             String  userEmail =  FirebaseAuth.getInstance().getCurrentUser().getEmail();
             if (postPosition.getUserEmail().equals(userEmail)){
                 holder.btnDelete.setVisibility(View.VISIBLE);
             }
-        }
-
-        if (postPosition.getPostDescription().isEmpty()) holder.postDescription.setVisibility(View.GONE);
-        if (postPosition.getPhoneNumber2().isEmpty()){
-            holder.btnCall2.setVisibility(View.INVISIBLE);
-            holder.postContactNumber2.setVisibility(View.INVISIBLE);
         }
 
 
@@ -79,7 +90,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostHolder> {
         holder.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                showAlertDialog("ডিলেট করতে চান?","আপডেট করুন","না","ডিলিটকরুন", holder.getAdapterPosition());
             }
         });
 
@@ -146,6 +157,135 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostHolder> {
                 holder.btnDelete.setVisibility(View.INVISIBLE);
             }
         }
+    }
+
+    void showAlertDialog(String title, String yes,String no, String delete,int position){
+        String id,name,phone,gender,union,village,group,username;
+        boolean forEveryone;
+
+        new AlertDialog.Builder(context)
+                .setTitle(title)
+                .setIcon(R.drawable.proyash_logo)
+                .setPositiveButton(yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        showUpdateAlert(position);
+                    }
+                }).setNegativeButton(no, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                }).setNeutralButton(delete, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        postReference.child(postList.get(position).getId())
+                                .removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            // Remove the item from the list and notify the adapter
+                                            postList.remove(position);
+                                            notifyItemRemoved(position);
+                                            notifyItemRangeChanged(position, postList.size());
+                                            Toast.makeText(context, "পোস্ট ডিলিট করা হয়েছে!", Toast.LENGTH_SHORT).show();
+                                        }
+                                        else {
+                                            Toast.makeText(context, "পোস্ট ডিলিট ব্যার্থ হয়েছে!", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
+
+                    }
+                }).create().show();
+    }
+
+    private void showUpdateAlert(int position) {
+        PostModel itemsPosition = postList.get(position);
+
+        AlertDialog.Builder updateDialogBuilder = new AlertDialog.Builder(context);
+        updateDialogBuilder.setTitle("আপডেট করুন").setIcon(R.drawable.proyash_logo);
+
+        View dialogView = LayoutInflater.from(context).inflate(R.layout.post_update_style,null);
+        updateDialogBuilder.setView(dialogView);
+
+        //setting views with id;
+        TextInputEditText updatePhone1 = dialogView.findViewById(R.id.updatePhone1);
+        TextInputEditText updatePhone2 = dialogView.findViewById(R.id.updatePhone2);
+        AutoCompleteTextView updateGroup = dialogView.findViewById(R.id.updateGroup);
+        TextInputEditText updateLocation = dialogView.findViewById(R.id.updateLocation);
+        TextInputEditText updateDescription = dialogView.findViewById(R.id.updateDescription);
+        TextInputEditText updatePatientType = dialogView.findViewById(R.id.updatePatientType);
+        Button btnPostUpdate = dialogView.findViewById(R.id.btnPostUpdate);
+
+        //setting pre added data
+        updatePhone1.setText(itemsPosition.getPhoneNumber1());
+        updatePhone2.setText(itemsPosition.getPhoneNumber2());
+        updateGroup.setText(itemsPosition.getPostGroup());
+        updateLocation.setText(itemsPosition.getPostLocation());
+        updateDescription.setText(itemsPosition.getPostDescription());
+        updatePatientType.setText(itemsPosition.getPostPatientType());
+
+        //setting adapter to spinner
+        updateGroup.setAdapter(new ArrayAdapter(context, android.R.layout.simple_list_item_1,context.getResources().getStringArray(R.array.blood_group_list)));
+
+        //updateButton
+        btnPostUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               String id = itemsPosition.getId();
+               String personName = itemsPosition.getPostPersonName();
+               String postGroup = updateGroup.getText().toString().trim();
+               String postPatientType = updatePatientType.getText().toString().trim();
+               String postLocation = updateLocation.getText().toString().trim();
+               String postDescription = updateDescription.getText().toString().trim();
+               String phoneNumber1 = updatePhone1.getText().toString().trim();
+               String phoneNumber2 = updatePhone2.getText().toString().trim();
+               String date = itemsPosition.getDate();
+               String email = itemsPosition.getUserEmail();
+
+                //updatin data to items model
+                updateItem(itemsPosition,position,id,personName,postGroup,postPatientType,postLocation,postDescription,phoneNumber1,phoneNumber2,
+                        date,email);
+            }
+        });
+        updateDialogBuilder.setPositiveButton("বন্ধ করুন", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        updateDialogBuilder.create().show();
+    }
+
+    private void updateItem(PostModel itemsPosition, int position, String id, String personName, String postGroup, String postPatientType, String postLocation, String postDescription, String phoneNumber1, String phoneNumber2, String date, String email) {
+
+        //setting data to items model
+        itemsPosition.setId(id);
+        itemsPosition.setPostPersonName(personName);
+        itemsPosition.setPostGroup(postGroup);
+        itemsPosition.setPostPatientType(postPatientType);
+        itemsPosition.setPostLocation(postLocation);
+        itemsPosition.setPostDescription(postDescription);
+        itemsPosition.setPhoneNumber1(phoneNumber1);
+        itemsPosition.setPhoneNumber2(phoneNumber2);
+        itemsPosition.setDate(date);
+        itemsPosition.setUserEmail(email);
+
+        String key = itemsPosition.getId();
+        postReference.child(key).setValue(itemsPosition)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()){
+                            notifyItemChanged(position);
+                            Toast.makeText(context, "আপডেট করা হয়েছে", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            Toast.makeText(context, "আপডেট ব্যার্থ হয়েছে", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 
     public class PostHolder extends RecyclerView.ViewHolder {

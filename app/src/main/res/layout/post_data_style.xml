@@ -66,7 +66,7 @@
         android:layout_marginTop="8dp"
         android:fontFamily="@font/kohinur"
         android:text="🩸যে ধরনের রক্তের প্রয়োজনঃ  "
-        android:textSize="16dp"
+        android:textSize="@dimen/_12sdp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/postImage"
         app:layout_constraintTop_toBottomOf="@+id/postImage" />
@@ -78,7 +78,7 @@
         android:fontFamily="@font/carve_font"
         android:text="AB+"
         android:textColor="@color/primary_color"
-        android:textSize="15dp"
+        android:textSize="@dimen/_11sdp"
         app:layout_constraintBottom_toBottomOf="@+id/textView"
         app:layout_constraintStart_toEndOf="@+id/textView"
         app:layout_constraintTop_toTopOf="@+id/textView" />
@@ -90,7 +90,7 @@
         android:layout_marginTop="4dp"
         android:fontFamily="@font/kohinur"
         android:text="🚑রোগীর ধরনঃ  "
-        android:textSize="16dp"
+        android:textSize="@dimen/_12sdp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -102,7 +102,7 @@
         android:fontFamily="@font/kohinur"
         android:text="সিজারের রোগী"
         android:textColor="@color/primary_color"
-        android:textSize="16dp"
+        android:textSize="@dimen/_12sdp"
         app:layout_constraintBottom_toBottomOf="@+id/textView2"
         app:layout_constraintStart_toEndOf="@+id/textView2"
         app:layout_constraintTop_toTopOf="@+id/textView2" />
@@ -115,7 +115,7 @@
         android:layout_marginBottom="20dp"
         android:fontFamily="@font/kohinur"
         android:text="📌লোকেশনঃ  "
-        android:textSize="16dp"
+        android:textSize="@dimen/_12sdp"
         android:paddingBottom="10dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/textView2"
@@ -126,13 +126,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/kohinur"
-        android:text="পটুয়াখালী সরকারী হাসপাতাল"
-        android:paddingBottom="10dp"
+        android:maxLength="38"
+        android:paddingBottom="@dimen/_8sdp"
+        android:text="পটুয়াখালী সরকারী হাসপাতাল, বনানির মোড় পটুয়াখালী"
         android:textColor="@color/primary_color"
-        android:textSize="16dp"
+        android:textSize="@dimen/_12sdp"
         app:layout_constraintBottom_toBottomOf="@+id/textView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
         app:layout_constraintStart_toEndOf="@+id/textView3"
-        app:layout_constraintTop_toTopOf="@+id/textView3" />
+        app:layout_constraintTop_toTopOf="@+id/textView3"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/btnCall1"
@@ -192,7 +196,7 @@
         android:layout_marginBottom="8dp"
         app:layout_constraintEnd_toEndOf="@+id/postContactNumber2"
         app:layout_constraintStart_toStartOf="@+id/postImage"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/postLocation" />
 
     <View
         android:id="@+id/view3"
