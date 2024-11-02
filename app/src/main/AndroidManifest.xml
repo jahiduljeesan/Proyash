@@ -27,11 +27,6 @@
             android:name=".activity.PostAddActivity"
             android:exported="false" />
 
-        <service
-            android:name=".services.FirebaseServices"
-            android:exported="false"
-            android:foregroundServiceType="location|dataSync" />
-
         <activity
             android:name=".activity.AboutActivity"
             android:exported="false" />

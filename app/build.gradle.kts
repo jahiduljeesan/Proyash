@@ -34,6 +34,11 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    packaging {
+        resources {
+            excludes += "META-INF/DEPENDENCIES"
+        }
+    }
 }
 
 dependencies {
@@ -45,6 +50,7 @@ dependencies {
     implementation(libs.firebase.database)
     implementation(libs.firebase.messaging)
     implementation(libs.firebase.auth)
+    implementation(libs.firebase.inappmessaging.display)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
@@ -52,4 +58,6 @@ dependencies {
     implementation ("de.hdodenhof:circleimageview:3.1.0")
     implementation ("com.intuit.sdp:sdp-android:1.1.1")
     implementation ("androidx.work:work-runtime:2.8.1")
+    implementation ("com.google.auth:google-auth-library-oauth2-http:1.11.0") // For generating OAuth tokens
+    implementation ("com.squareup.okhttp3:okhttp:4.9.1")
 }

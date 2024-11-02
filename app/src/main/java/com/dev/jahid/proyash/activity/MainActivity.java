@@ -3,6 +3,7 @@ package com.dev.jahid.proyash.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -17,9 +18,10 @@ import com.dev.jahid.proyash.fragment.AddFragment;
 import com.dev.jahid.proyash.fragment.HomeFragment;
 import com.dev.jahid.proyash.fragment.PostFragment;
 import com.dev.jahid.proyash.fragment.ProfileFragment;
-import com.dev.jahid.proyash.services.FirebaseServices;
+
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,9 +35,18 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // Start the Firebase monitoring service
-        Intent serviceIntent = new Intent(this, FirebaseServices.class);
-        startService(serviceIntent);
+        FirebaseMessaging.getInstance().subscribeToTopic("allUsers")
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Log.d("Subscription", "Subscribed to allUsers topic successfully.");
+                    } else {
+                        Log.e("Subscription", "Failed to subscribe to allUsers topic.");
+                    }
+                });
+
+//        // Start the Firebase monitoring service
+//        Intent serviceIntent = new Intent(this, FirebaseServices.class);
+//        startService(serviceIntent);
 
         replaceFragment(new HomeFragment());
 

@@ -12,6 +12,10 @@
         android:icon="@drawable/add_icon"
         android:id="@+id/navList"
         />
+    <item android:title="Emergency"
+        android:icon="@drawable/emergency_icon"
+        android:id="@+id/emergencyList"
+        />
     <item android:title="Profile"
         android:icon="@drawable/profile_icon"
         android:id="@+id/navProfile"/>

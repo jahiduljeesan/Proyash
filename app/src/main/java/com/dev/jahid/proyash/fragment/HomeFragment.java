@@ -61,12 +61,13 @@ public class HomeFragment extends Fragment{
                     //Collapsed
                     binding.toolbar.setVisibility(View.VISIBLE);
                     binding.tabLayout.setPadding(0,74,0,0);
-                    binding.homeNestedLayout.setPadding(0,70,0,0);
+                    binding.homeNestedLayout.setPadding(0,0,0,0);
                 }
                 else if (verticalOffset == 0) {
                     //Fully expended
                     binding.toolbar.setVisibility(View.INVISIBLE);
                     binding.tabLayout.setPadding(0,0,0,0);
+                    binding.homeNestedLayout.setPadding(0,70,0,0);
                 }
                 else {
                     //Somewhere in between

@@ -42,7 +42,7 @@ public class AppData {
 
     public AppData(Context context) {
         this.context = context;
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+        //FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         initAppData();
     }
 

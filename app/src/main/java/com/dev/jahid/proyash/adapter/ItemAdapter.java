@@ -72,6 +72,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemHoder> {
                 mangageDonor(holder,"অ্যাড করতে চান?","হ্যাঁ","না","ডিলিট করুন",holder.getAdapterPosition());
             }
             else {
+                holder.donorItems.setBackgroundColor(ContextCompat.getColor(context,R.color.white));
                 mangageDonor(holder,"ডিলিট করতে চান?","আপডেট করুন","না","ডিলিট করুন",holder.getAdapterPosition());
             }
         }

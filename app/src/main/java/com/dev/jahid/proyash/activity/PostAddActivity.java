@@ -18,6 +18,7 @@ import com.dev.jahid.proyash.R;
 import com.dev.jahid.proyash.database.PostModel;
 import com.dev.jahid.proyash.databinding.ActivityPostAddBinding;
 import com.dev.jahid.proyash.fragment.PostFragment;
+import com.dev.jahid.proyash.services.NotificationSender;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -78,7 +79,10 @@ public class PostAddActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void unused) {
                         if (progressDialog.isShowing()) progressDialog.dismiss();
-                        startActivity(new Intent(PostAddActivity.this, PostFragment.class));
+                        // Get the data (e.g., title, message)
+                        String title = postGroup + " রক্ত প্রয়োজন";
+                        String body = postLocation+"";
+                        NotificationSender.sendNotificationToTopic(PostAddActivity.this, title, body);
                         Toast.makeText(PostAddActivity.this, "পোস্ট করা হয়েছে", Toast.LENGTH_SHORT).show();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
