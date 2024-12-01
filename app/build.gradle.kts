@@ -54,10 +54,16 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+    implementation ("com.onesignal:OneSignal:[5.0.0, 5.99.99]")
+
     implementation ("com.airbnb.android:lottie:3.4.0")
     implementation ("de.hdodenhof:circleimageview:3.1.0")
     implementation ("com.intuit.sdp:sdp-android:1.1.1")
-    implementation ("androidx.work:work-runtime:2.8.1")
-    implementation ("com.google.auth:google-auth-library-oauth2-http:1.11.0") // For generating OAuth tokens
-    implementation ("com.squareup.okhttp3:okhttp:4.9.1")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.google.auth:google-auth-library-oauth2-http:1.5.3")
+    implementation ("androidx.work:work-runtime:2.7.1")
+
+
 }

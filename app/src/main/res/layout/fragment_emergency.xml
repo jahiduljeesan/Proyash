@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/ash"
+    tools:context=".emergency.EmergencyFragment">
+
+    <ImageView
+        android:id="@+id/bnBack"
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:src="@drawable/arrow_back"
+        android:elevation="10dp"
+        app:tint="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/titleCard"
+        app:layout_constraintStart_toStartOf="@+id/titleCard"
+        app:layout_constraintTop_toTopOf="@+id/titleCard" />
+
+    <ImageView
+        android:id="@+id/btnAdd"
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_16sdp"
+        android:src="@drawable/add_icon"
+        android:elevation="10dp"
+        app:tint="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/titleCard"
+        app:layout_constraintEnd_toEndOf="@+id/titleCard"
+        app:layout_constraintTop_toTopOf="@+id/titleCard" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/titleCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_8sdp"
+        app:cardCornerRadius="@dimen/_11sdp"
+        app:cardElevation="8dp"
+        app:cardBackgroundColor="@color/primary_color"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/kohinur"
+            android:text="ইমার্জেন্সি কন্টাক্ট"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_20sdp"
+            android:textStyle="bold" />
+    </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroup"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_6sdp"
+        app:layout_constraintTop_toBottomOf="@id/titleCard"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:selectionRequired="true"
+        app:singleSelection="true">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checkable="true"
+            android:text="সব" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipPolice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checkable="true"
+            android:text="পুলিশ" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipAmbulance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checkable="true"
+            android:text="অ্যাম্বুলেন্স" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipPalli"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="পল্লি বিদ্যুৎ অভিযোগ"
+            android:checkable="true"
+            android:fontFamily="@font/kohinur" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipFire"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ফায়ার সার্ভিস"
+            android:checkable="true"
+            android:fontFamily="@font/kohinur" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipBus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="বাস টিকেট"
+            android:checkable="true"
+            android:fontFamily="@font/kohinur" />
+
+        <!-- Add other chips as needed -->
+    </com.google.android.material.chip.ChipGroup>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/emergencyListView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        tools:listitem="@layout/emergency_contact_style"
+        app:layout_constraintTop_toBottomOf="@id/chipGroup"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,17 +6,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primary_color"
-    tools:context=".activity.LoginActivity">
+    tools:context=".authentication.LoginActivity">
 
     <ImageView
         android:id="@+id/btnBack"
-        android:layout_width="40dp"
-        android:layout_height="30dp"
-        android:layout_margin="20dp"
+        android:layout_width="@dimen/_32sdp"
+        android:layout_height="@dimen/_25sdp"
+        android:layout_margin="@dimen/_16sdp"
         android:background="@drawable/data_add_act_items_bg"
         android:src="@drawable/arrow_back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnSkip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:text="স্কিপ করুন"
+        android:fontFamily="@font/kohinur"
+        android:textSize="@dimen/_16sdp"
+        android:textColor="@color/primary_color"
+        android:backgroundTint="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <TextView
         android:id="@+id/loginPageText"
@@ -92,7 +107,7 @@
                 android:background="@drawable/login_et_bg"
                 android:hint="ex. jahidul@email.com"
                 android:inputType="textEmailAddress"
-                android:minHeight="48dp" />
+                />
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -129,7 +144,7 @@
                 android:background="@drawable/login_et_bg"
                 android:hint="Password"
                 android:inputType="textPassword"
-                android:minHeight="48dp" />
+                />
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -153,10 +168,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:text="অ্যাকাউন্ট তৈরি করা নেই?"
+            android:text="অ্যাকাউন্ট তৈরি করা নেই?  "
             android:textColor="@color/black"
             android:textSize="18dp"
-            app:layout_constraintStart_toStartOf="@+id/guideline18"
+            app:layout_constraintEnd_toStartOf="@+id/btnSignUp"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnSubmit" />
 
         <TextView
@@ -169,7 +187,8 @@
             android:textSize="18dp"
             android:textStyle="italic"
             app:layout_constraintBottom_toBottomOf="@+id/tvDontHaveAccount"
-            app:layout_constraintEnd_toStartOf="@+id/guideline19"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/tvDontHaveAccount"
             app:layout_constraintTop_toTopOf="@+id/tvDontHaveAccount" />
 

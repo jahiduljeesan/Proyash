@@ -12,8 +12,10 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
     <application
+        android:name=".notification.ProyashApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -24,18 +26,19 @@
         android:theme="@style/Theme.Proyash"
         tools:targetApi="31">
 
-        <service android:name=".services.FirebaseServices"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
-            </intent-filter>
-        </service>
 
+        <!-- OneSignal Metadata -->
+        <meta-data
+            android:name="com.onesignal.NotificationOpenedActivity"
+            android:value="true" />
+        <meta-data
+            android:name="com.onesignal.NotificationOpened.DEFAULT"
+            android:value="true" />
 
+        <!-- Activities -->
         <activity
-            android:name=".activity.PostAddActivity"
+            android:name=".donor.ui.DonorAddActivity"
             android:exported="false" />
-
         <activity
             android:name=".activity.AboutActivity"
             android:exported="false" />
@@ -44,22 +47,22 @@
             android:exported="false" />
         <activity
             android:name=".activity.MainActivity"
+            android:launchMode="singleTask"
             android:exported="false" />
         <activity
-            android:name=".activity.SignupActivity"
+            android:name=".authentication.SignupActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.LoginActivity"
+            android:name=".authentication.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".activity.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-    </application>
 
+    </application>
 </manifest>

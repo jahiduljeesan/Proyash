@@ -20,7 +20,6 @@
         app:layout_constraintTop_toTopOf="parent" >
 
         <TextView
-            android:id="@+id/btnBack"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/kohinur"
@@ -33,6 +32,7 @@
     </androidx.cardview.widget.CardView>
 
     <ImageView
+        android:id="@+id/btnBack"
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_marginStart="20dp"
@@ -43,19 +43,6 @@
         app:layout_constraintStart_toStartOf="@+id/titleCard"
         app:layout_constraintTop_toTopOf="@+id/titleCard" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/imageCard"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/titleCard" >
-
-
-    </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -66,23 +53,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageCard">
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        app:layout_constraintTop_toBottomOf="@id/titleCard">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:minHeight="700dp"
                 android:scrollbarAlwaysDrawHorizontalTrack="false">
 
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/imageView3"
-                    android:layout_width="@dimen/_115sdp"
-                    android:layout_height="@dimen/_115sdp"
+                    android:layout_width="@dimen/_110sdp"
+                    android:layout_height="@dimen/_110sdp"
                     android:layout_marginLeft="@dimen/_8sdp"
                     android:layout_marginTop="@dimen/_12sdp"
                     android:src="@drawable/profile_imgae"
@@ -162,24 +144,14 @@
                     app:layout_constraintStart_toEndOf="@+id/btnJahidGh"
                     app:layout_constraintTop_toTopOf="@+id/btnJahidGh" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:text="All rights reserved by the owner"
-                    android:textAlignment="center"
-                    android:textStyle="italic"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
 
                 <View
                     android:id="@+id/view2"
                     android:layout_width="0dp"
                     android:layout_height="1dp"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="30dp"
+                    android:layout_marginStart="@dimen/_23sdp"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:layout_marginEnd="@dimen/_23sdp"
                     android:layout_marginBottom="20dp"
                     android:background="@color/black"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -191,7 +163,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/kohinur"
-                    android:padding="@dimen/_10sdp"
+                    android:padding="@dimen/_8sdp"
                     android:text="@string/developer_thaughts"
                     android:textAlignment="textStart"
                     android:textSize="@dimen/_16sdp"
@@ -216,6 +188,7 @@
                     android:text="সহযোগিতায়:"
                     android:textAlignment="center"
                     android:textSize="22sp"
+                    android:layout_marginBottom="@dimen/_4sdp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -225,7 +198,8 @@
                     android:id="@+id/imgOchien"
                     android:layout_width="@dimen/_55sdp"
                     android:layout_height="@dimen/_55sdp"
-                    app:cardCornerRadius="@dimen/_11sdp"
+                    app:cardCornerRadius="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_4sdp"
                     app:layout_constraintEnd_toStartOf="@+id/imgShakil"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView8">
@@ -251,7 +225,7 @@
                     android:id="@+id/imgShakil"
                     android:layout_width="@dimen/_55sdp"
                     android:layout_height="@dimen/_55sdp"
-                    app:cardCornerRadius="@dimen/_11sdp"
+                    app:cardCornerRadius="@dimen/_8sdp"
                     app:layout_constraintBottom_toBottomOf="@+id/imgOchien"
                     app:layout_constraintEnd_toStartOf="@+id/imgRakib"
                     app:layout_constraintHorizontal_bias="0.5"
@@ -261,7 +235,7 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/ochien_image" />
+                        android:src="@drawable/shakil_image" />
                 </androidx.cardview.widget.CardView>
 
 
@@ -280,7 +254,7 @@
                     android:id="@+id/imgRakib"
                     android:layout_width="@dimen/_55sdp"
                     android:layout_height="@dimen/_55sdp"
-                    app:cardCornerRadius="@dimen/_11sdp"
+                    app:cardCornerRadius="@dimen/_8sdp"
                     app:layout_constraintBottom_toBottomOf="@+id/imgShakil"
                     app:layout_constraintEnd_toStartOf="@+id/imgFoysal"
                     app:layout_constraintHorizontal_bias="0.5"
@@ -290,7 +264,7 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/ochien_image" />
+                        android:src="@drawable/rakib_image" />
                 </androidx.cardview.widget.CardView>
 
                 <TextView
@@ -307,7 +281,7 @@
                     android:id="@+id/imgFoysal"
                     android:layout_width="@dimen/_55sdp"
                     android:layout_height="@dimen/_55sdp"
-                    app:cardCornerRadius="@dimen/_11sdp"
+                    app:cardCornerRadius="@dimen/_8sdp"
                     app:layout_constraintBottom_toBottomOf="@+id/imgRakib"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
@@ -317,13 +291,13 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/foysal_image" />
+                        android:src="@drawable/nazmul_image" />
                 </androidx.cardview.widget.CardView>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="ফয়সাল"
+                    android:text="নাজমুল"
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="@+id/imgFoysal"
@@ -345,10 +319,7 @@
                     android:orientation="vertical"
                     app:layout_constraintGuide_percent=".90" />
 
-
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </ScrollView>
-
 
     </androidx.cardview.widget.CardView>
 

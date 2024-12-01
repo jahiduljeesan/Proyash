@@ -15,11 +15,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.dev.jahid.proyash.R;
 import com.dev.jahid.proyash.activity.AboutActivity;
-import com.dev.jahid.proyash.activity.LoginActivity;
-import com.dev.jahid.proyash.adapter.PostAdapter;
-import com.dev.jahid.proyash.database.UserAuthentication;
+import com.dev.jahid.proyash.authentication.LoginActivity;
+import com.dev.jahid.proyash.authentication.UserAuthentication;
 import com.dev.jahid.proyash.databinding.FragmentProfileBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -118,7 +116,6 @@ public class ProfileFragment extends Fragment {
                 editor.apply();
 
                 ProfileFragment.firstTime = true;
-                PostAdapter.firstTime = true;
                 UserAuthentication.isAdmin = false;
 
                 requireActivity().onBackPressed();
@@ -128,27 +125,12 @@ public class ProfileFragment extends Fragment {
     }
 
     private void parseAdmin() {
-        if (firstTime){
-            new UserAuthentication(new UserAuthentication.IsAuthenticate() {
-                @Override
-                public void setIsAuthenticate(boolean isAdmin) {
-                    if (isAdmin){
-                        binding.tvFragmentName.setText("প্রোফাইল(এডমিন)");
-                    }
-                    else {
-                        binding.tvFragmentName.setText("প্রোফাইল");
-                    }
-                    firstTime = false;
-                }
-            });
-        }else {
             if (UserAuthentication.isAdmin){
                 binding.tvFragmentName.setText("প্রোফাইল(এডমিন)");
             }
             else {
                 binding.tvFragmentName.setText("প্রোফাইল");
             }
-        }
     }
 
     private void setIntent(String tag) {

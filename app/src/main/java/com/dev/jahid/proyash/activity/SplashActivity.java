@@ -1,30 +1,23 @@
 package com.dev.jahid.proyash.activity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.Network;
-import android.net.NetworkInfo;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.WindowManager;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.dev.jahid.proyash.R;
-import com.dev.jahid.proyash.database.AppData;
-import com.dev.jahid.proyash.database.UserAuthentication;
+import com.dev.jahid.proyash.authentication.LoginActivity;
+import com.dev.jahid.proyash.authentication.UserAuthentication;
 import com.dev.jahid.proyash.databinding.ActivitySplashBinding;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
 
-public class SplashActivity extends AppCompatActivity{
+public class SplashActivity extends AppCompatActivity {
 
     private ActivitySplashBinding binding;
-    private AppData appData;
+    private SharedPreferences sharedPrefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,60 +25,59 @@ public class SplashActivity extends AppCompatActivity{
         binding = ActivitySplashBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        //Full screen activity
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        appData = AppData.getAppData(this);
+        // Full screen activity
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+        sharedPrefs = getSharedPreferences("com.dev.jahid.proyash.firstime",MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPrefs.edit();
+        editor.putBoolean("FirstTime",true);
+        editor.commit();
 
-//        if (haveNetwork(this)) {
-//            new Handler(getMainLooper()).postDelayed(new Runnable() {
-//                @Override
-//                public void run() {
-//                    startActivity(new Intent(SplashActivity.this,MainActivity.class));
-//                    finish();
-//                }
-//            },4000);
-//        }
-//        else {
-//
-//        }
-        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
-            appData.setAppDataCallback(new AppData.AppDataCallback() {
-                @Override
-                public void displayData(Boolean isDataLoaded) {
-                    Log.d("isDataLoaded",isDataLoaded+"");
-                    if (isDataLoaded) {
-                        startActivity(new Intent(SplashActivity.this,MainActivity.class));
-                        finish();
+        if (!sharedPrefs.getBoolean("FirstTime",true)) {
+            if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        navigateToMainActivity();
                     }
-                }
-            });
+                },2500);
+            } else {
+                startApp();
+            }
         }else {
-            appData.setAppDataCallback(new AppData.AppDataCallback() {
-                @Override
-                public void displayData(Boolean isDataLoaded) {
-                    Log.d("isDataLoaded",isDataLoaded+"");
-                    if (isDataLoaded) {
-                        startApp();
-                    }
-                }
-            });
+            navigateToLoginActivity();
         }
+
+    }
+
+    private void navigateToLoginActivity() {
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent splashToLogin = new Intent(SplashActivity.this, LoginActivity.class);
+                splashToLogin.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(splashToLogin);
+                finish();
+            }
+        },2500);
     }
 
     void startApp() {
         new UserAuthentication(new UserAuthentication.IsAuthenticate() {
             @Override
             public void setIsAuthenticate(boolean isAdmin) {
-                startActivity(new Intent(SplashActivity.this,MainActivity.class));
-                finish();
+                    navigateToMainActivity();
             }
         });
     }
 
-    private boolean haveNetwork(@NonNull Context context) {
-        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-        return networkInfo != null && networkInfo.isConnected();
+    private void navigateToMainActivity() {
+        Log.d("SplashActivity", "Navigating to MainActivity");
+            Intent splashToMain = new Intent(SplashActivity.this, MainActivity.class);
+            splashToMain.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(splashToMain);
+            finish();
     }
+
 }

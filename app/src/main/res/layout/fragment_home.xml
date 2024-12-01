@@ -30,11 +30,13 @@
                 android:background="@color/primary_color">
 
                 <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
+                    android:layout_width="@dimen/_70sdp"
+                    android:layout_height="@dimen/_70sdp"
                     android:padding="0dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/proyash_image"
+                    android:paddingTop="8dp"
+                    android:elevation="10dp"
+                    android:background="@drawable/logo_bg"
+                    android:src="@drawable/proyash_logo"
                     app:layout_constraintBottom_toTopOf="@+id/guideline14"
                     app:layout_constraintEnd_toStartOf="@+id/guideline16"
                     app:layout_constraintStart_toStartOf="@+id/guideline15"
@@ -102,51 +104,41 @@
                 app:titleTextAppearance="@style/TextAppearance.AppCompat.Large">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/customToolbar"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="60dp"
+                    android:paddingEnd="16dp"
+                    android:paddingStart="16dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/castom_toolbar_bg"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                    <androidx.appcompat.widget.SearchView
-                        android:id="@+id/searchView"
-                        style="@style/castomSearchView"
+                    <TextView
+                        android:id="@+id/etPostData"
                         android:layout_width="0dp"
-                        android:layout_height="@dimen/_34sdp"
+                        android:layout_height="40dp"
+                        android:layout_margin="10dp"
+                        android:textAlignment="gravity"
+                        android:gravity="center_vertical"
+                        android:text="রক্তের জন্য পোস্ট করুন..."
+                        android:fontFamily="@font/kohinur"
+                        android:inputType="none"
                         android:background="@drawable/searchbar_bg"
-                        app:iconifiedByDefault="false"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/guideline21"
-                        app:layout_constraintStart_toStartOf="@+id/guideline20"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:queryHint="এখানে খুজুন..." />
+                        app:layout_constraintEnd_toStartOf="@+id/btnPostData"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-
-
-                    <com.airbnb.lottie.LottieAnimationView
-                        android:id="@+id/animationView"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:layout_margin="4dp"
-                        android:layout_marginTop="-10dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/searchView"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:lottie_autoPlay="true"
-                        app:lottie_loop="true"
-                        app:lottie_rawRes="@raw/animation2" />
-
-                    <androidx.constraintlayout.widget.Guideline
-                        android:id="@+id/guideline20"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        app:layout_constraintGuide_percent=".05" />
-                    <androidx.constraintlayout.widget.Guideline
-                        android:id="@+id/guideline21"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        app:layout_constraintGuide_percent=".8" />
-
-
+                    <ImageView
+                        android:id="@+id/btnPostData"
+                        android:layout_width="45dp"
+                        android:layout_height="0dp"
+                        android:src="@drawable/add_icon"
+                        app:layout_constraintBottom_toBottomOf="@+id/etPostData"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/etPostData" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </com.google.android.material.appbar.MaterialToolbar>
@@ -156,99 +148,26 @@
     <androidx.core.widget.NestedScrollView
         android:id="@+id/homeNestedLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="@dimen/_70sdp"
-        android:paddingTop="@dimen/_8sdp"
+        android:layout_height="match_parent"
         android:background="@drawable/home_view_bg"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/homeConstraintLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="@drawable/home_view_bg"
-            android:minHeight="700dp">
-
-<!--            <TextView-->
-<!--                android:id="@+id/tvBloodGroup"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="@string/blood_group_text"-->
-<!--                android:textAlignment="center"-->
-<!--                android:fontFamily="@font/alinur"-->
-<!--                android:textSize="22dp"-->
-<!--                android:textColor="@color/primary_color"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toTopOf="parent"/>-->
-
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tabLayout"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:background="@color/white"
+            android:minHeight="800dp">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/postListView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:layout_marginTop="@dimen/_8sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                >
-
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="All" />
-
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/blood_group_a_positive" />
-
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/blood_group_a_negetive" />
-
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/blood_group_b_positive" />
-
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/blood_group_b_negetive" />
-
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/blood_group_o_positive" />
-
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/blood_group_o_negetive" />
-
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/blood_group_ab_positive" />
-
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/blood_group_ab_negetive" />
-
-            </com.google.android.material.tabs.TabLayout>
-
-            <androidx.viewpager.widget.ViewPager
-                android:id="@+id/dataFragmentContainer"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
-
+                tools:listitem="@layout/post_data_style" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

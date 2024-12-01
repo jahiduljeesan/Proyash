@@ -1,6 +1,5 @@
 package com.dev.jahid.proyash.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -14,13 +13,13 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.dev.jahid.proyash.R;
 import com.dev.jahid.proyash.databinding.ActivityMainBinding;
-import com.dev.jahid.proyash.fragment.AddFragment;
-import com.dev.jahid.proyash.fragment.HomeFragment;
-import com.dev.jahid.proyash.fragment.PostFragment;
+import com.dev.jahid.proyash.post.AddFragment;
+import com.dev.jahid.proyash.emergency.EmergencyFragment;
+import com.dev.jahid.proyash.post.HomeFragment;
 import com.dev.jahid.proyash.fragment.ProfileFragment;
 
 import com.google.android.material.navigation.NavigationBarView;
-import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 public class MainActivity extends AppCompatActivity {
@@ -35,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        FirebaseApp.initializeApp(this);
+
         FirebaseMessaging.getInstance().subscribeToTopic("allUsers")
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -44,11 +45,14 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-//        // Start the Firebase monitoring service
-//        Intent serviceIntent = new Intent(this, FirebaseServices.class);
-//        startService(serviceIntent);
-
         replaceFragment(new HomeFragment());
+
+        HomeFragment.getAddButtonClick(new HomeFragment.AddButtonClicked() {
+            @Override
+            public void setClick() {
+                replaceFragment(new AddFragment());
+            }
+        });
 
         binding.bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -58,7 +62,8 @@ public class MainActivity extends AppCompatActivity {
                 if (itemId == R.id.navHome) replaceFragment(new HomeFragment());
                 if (itemId == R.id.navList) replaceFragment(new AddFragment());
                 if (itemId == R.id.navProfile) replaceFragment(new ProfileFragment());
-                if (itemId == R.id.navRequest) replaceFragment(new PostFragment());
+                if (itemId == R.id.navRequest) replaceFragment(new DonorUIFragment());
+                if (itemId == R.id.navEmergency) replaceFragment(new EmergencyFragment());
 
                 return true;
             }
