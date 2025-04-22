@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.dev.jahid.proyash.R;
 import com.dev.jahid.proyash.databinding.ActivityMainBinding;
+import com.dev.jahid.proyash.donor.ui.DonorUiFragment;
 import com.dev.jahid.proyash.post.AddFragment;
 import com.dev.jahid.proyash.emergency.EmergencyFragment;
 import com.dev.jahid.proyash.post.HomeFragment;
@@ -62,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
                 if (itemId == R.id.navHome) replaceFragment(new HomeFragment());
                 if (itemId == R.id.navList) replaceFragment(new AddFragment());
                 if (itemId == R.id.navProfile) replaceFragment(new ProfileFragment());
-                if (itemId == R.id.navRequest) replaceFragment(new DonorUIFragment());
+                if (itemId == R.id.navRequest) replaceFragment(new DonorUiFragment());
                 if (itemId == R.id.navEmergency) replaceFragment(new EmergencyFragment());
 
                 return true;

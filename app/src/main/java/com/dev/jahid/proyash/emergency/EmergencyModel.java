@@ -1,16 +1,25 @@
 package com.dev.jahid.proyash.emergency;
 
 public class EmergencyModel {
-    String name,title,phone,category;
+    private String name,title,phone,category,key;
 
-    public EmergencyModel(String name, String title, String phone, String category) {
+    public EmergencyModel(String name, String title, String phone, String category, String key) {
         this.name = name;
         this.title = title;
         this.phone = phone;
         this.category = category;
+        this.key = key;
     }
 
     public EmergencyModel() {
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public String getName() {

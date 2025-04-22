@@ -1,4 +1,4 @@
-package com.dev.jahid.proyash.notification;
+package com.dev.jahid.proyash.tools;
 
 import android.app.Application;
 
@@ -7,6 +7,7 @@ import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
 
 import com.dev.jahid.proyash.authentication.UserAuthentication;
+import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -23,7 +24,16 @@ public class ProyashApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        //firebase initialization
         FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+
+        //admob ad initialization
+        new Thread(
+                () -> {
+                    // Initialize the Google Mobile Ads SDK on a background thread.
+                    MobileAds.initialize(this, initializationStatus -> {});
+                })
+                .start();
 
         new UserAuthentication(new UserAuthentication.IsAuthenticate() {
             @Override

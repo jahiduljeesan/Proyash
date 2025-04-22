@@ -85,7 +85,7 @@ public class AddFragment extends Fragment {
                 progressDialog.setCancelable(false);
                 progressDialog.show();
 
-                SimpleDateFormat formater = new SimpleDateFormat("dd/mm/yyyy hh:mm a", Locale.ENGLISH);
+                SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yyyy hh:mm a", Locale.ENGLISH);
                 Date now = new Date();
                 date = formater.format(now);
 

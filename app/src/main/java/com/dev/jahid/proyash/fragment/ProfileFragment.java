@@ -8,6 +8,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +20,7 @@ import android.widget.Toast;
 import com.dev.jahid.proyash.activity.AboutActivity;
 import com.dev.jahid.proyash.authentication.LoginActivity;
 import com.dev.jahid.proyash.authentication.UserAuthentication;
+import com.dev.jahid.proyash.authentication.UserViewModel;
 import com.dev.jahid.proyash.databinding.FragmentProfileBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -28,8 +31,9 @@ public class ProfileFragment extends Fragment {
     private DatabaseReference userReference;
     private FirebaseAuth userAuth;
     private String uid;
+    private UserViewModel userViewModel;
     private SharedPreferences userSharedPrefs;
-    private String userName,userEmail;
+    private String userEmail;
     public static boolean firstTime = true;
 
     @Override
@@ -47,11 +51,13 @@ public class ProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
+
         userSharedPrefs = getActivity().getSharedPreferences("com.dev.jahid.proyash.userdata", Context.MODE_PRIVATE);
-        userName = userSharedPrefs.getString("userName","");
+        //userName = userSharedPrefs.getString("userName","");
         userEmail = userSharedPrefs.getString("userEmail","");
 
-        Log.d("user_name",userName+"  "+userEmail);
+       // Log.d("user_name",userName+"  "+userEmail);
 
 
         if (!isLoggedIn()) {
@@ -62,9 +68,10 @@ public class ProfileFragment extends Fragment {
             binding.tvUserEmail.setVisibility(View.INVISIBLE);
             binding.tvFragmentName.setText("প্রোফাইল");
         }else {
-            Log.d("userchk",userName);
-            Log.d("userchk",userEmail);
-            binding.tvUserName.setText(userName);
+            userViewModel.getFullName().observe(requireActivity(),fullName -> {
+                binding.tvUserName.setText(fullName);
+            });
+            //binding.tvUserName.setText(userName);
             binding.tvUserEmail.setText(userEmail);
 
             binding.loginOrSupButton.setVisibility(View.INVISIBLE);
@@ -125,12 +132,21 @@ public class ProfileFragment extends Fragment {
     }
 
     private void parseAdmin() {
-            if (UserAuthentication.isAdmin){
+        userViewModel.userIsAdmin().observe(requireActivity(),userIsAdmin->{
+            UserAuthentication.isAdmin = userIsAdmin;
+            if (userIsAdmin){
                 binding.tvFragmentName.setText("প্রোফাইল(এডমিন)");
-            }
-            else {
+            }else {
                 binding.tvFragmentName.setText("প্রোফাইল");
             }
+        });
+
+        if (UserAuthentication.isAdmin){
+            binding.tvFragmentName.setText("প্রোফাইল(এডমিন)");
+        }
+        else {
+            binding.tvFragmentName.setText("প্রোফাইল");
+        }
     }
 
     private void setIntent(String tag) {
@@ -141,7 +157,7 @@ public class ProfileFragment extends Fragment {
 
     private void shareApp() {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
-        shareIntent.putExtra(Intent.EXTRA_TEXT,"প্রয়াস ২০২০ অ্যাপ ডাউনলোড করুন : https://proyash.wapkiz.com/");
+        shareIntent.putExtra(Intent.EXTRA_TEXT,"প্রয়াস ২০২০ অ্যাপ ডাউনলোড করুন : https://proyash20.tiiny.site/");
         shareIntent.setType("text/plain");
         startActivity(shareIntent);
     }

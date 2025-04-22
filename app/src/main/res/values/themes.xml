@@ -9,7 +9,7 @@
         <item name="android:color"> @color/primary_color</item>
     </style>
 
-    <style name="castomSearchView" parent="Widget.AppCompat.SearchView">
+    <style name="customSearchView" parent="Widget.AppCompat.SearchView">
         <item name="android:textColorHint"> @color/black </item>
         <item name="android:textColor">@color/black</item>
         <item name="searchIcon">@drawable/search_icon</item>

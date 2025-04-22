@@ -34,7 +34,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostHolder> {
     private DatabaseReference postReference;
     private AlertDialog alertDialog;
 
-
     public void setOnButtonClick(OnButtonClick onButtonClick) {
         this.onButtonClick = onButtonClick;
     }
@@ -230,6 +229,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostHolder> {
         itemsPosition.setUserEmail(email);
         itemsPosition.setCreatedAt(createdAt);
 
+        postReference = FirebaseDatabase.getInstance().getReference("PostData");
         String key = itemsPosition.getId();
         postReference.child(key).setValue(itemsPosition)
                 .addOnCompleteListener(task -> {

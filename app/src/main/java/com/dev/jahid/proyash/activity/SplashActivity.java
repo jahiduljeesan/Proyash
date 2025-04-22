@@ -29,9 +29,12 @@ public class SplashActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         sharedPrefs = getSharedPreferences("com.dev.jahid.proyash.firstime",MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPrefs.edit();
-        editor.putBoolean("FirstTime",true);
-        editor.commit();
+
+        if (!sharedPrefs.contains("FirstTime")) {
+            SharedPreferences.Editor editor = sharedPrefs.edit();
+            editor.putBoolean("FirstTime", true);
+            editor.commit();
+        }
 
         if (!sharedPrefs.getBoolean("FirstTime",true)) {
             if (FirebaseAuth.getInstance().getCurrentUser() == null) {

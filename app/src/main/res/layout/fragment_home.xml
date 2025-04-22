@@ -139,6 +139,7 @@
                         app:layout_constraintBottom_toBottomOf="@+id/etPostData"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/etPostData" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </com.google.android.material.appbar.MaterialToolbar>

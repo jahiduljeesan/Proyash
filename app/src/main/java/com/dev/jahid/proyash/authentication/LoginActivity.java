@@ -135,8 +135,6 @@ public class LoginActivity extends AppCompatActivity {
                             editor.putString("userEmail",email);
                             editor.commit();
 
-                            ProfileFragment.firstTime = true;
-
                             startActivity(new Intent(LoginActivity.this,MainActivity.class));
 
                             Toast.makeText(LoginActivity.this, "লগইন সফল হয়েছে!", Toast.LENGTH_SHORT).show();

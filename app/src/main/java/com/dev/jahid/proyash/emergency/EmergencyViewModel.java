@@ -25,12 +25,16 @@ public class EmergencyViewModel extends ViewModel {
     public LiveData<List<EmergencyModel>> getEmergencyList(){
         return emergencyList;
     }
+
     private void loadEmergencyList() {
         DatabaseReference emergencyRefs = FirebaseDatabase.getInstance().getReference("EmergencyData");
         emergencyRefs.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 List<EmergencyModel> emergencyModels = new ArrayList<>();
+
+                emergencyModels.clear();
+
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     EmergencyModel emergencyModel = dataSnapshot.getValue(EmergencyModel.class);
                     emergencyModels.add(0,emergencyModel);

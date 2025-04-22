@@ -1,5 +1,8 @@
-
 package com.dev.jahid.proyash.authentication;
+
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -7,24 +10,31 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class UserAuthentication {
+public class UserViewModel extends ViewModel {
+    MutableLiveData<String> fullName;
+    MutableLiveData<Boolean> userIsAdmin;
 
-    public static boolean isAdmin = false;
-    public static volatile UserAuthentication userAuthentication;
-    public IsAuthenticate isAuthenticate;
-
-    public UserAuthentication (IsAuthenticate isAuthenticate) {
-        this.isAuthenticate = isAuthenticate;
-        isAdmin();
+    public UserViewModel() {
+        fullName = new MutableLiveData<>();
+        userIsAdmin = new MutableLiveData<>();
+        loadData();
     }
 
+    public LiveData<String> getFullName(){
+        return fullName;
+    }
 
-    public boolean isAdmin(){
+    public LiveData<Boolean> userIsAdmin(){
+        return userIsAdmin;
+    }
+
+    private void loadData() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         if (user == null) {
-            isAdmin = false;
-            return false;
+            fullName.setValue("");
+            userIsAdmin.setValue(false);
+            return;
         }
 
         String uid = user.getUid();
@@ -35,14 +45,10 @@ public class UserAuthentication {
                     public void onSuccess(DataSnapshot dataSnapshot) {
                         UserModel userModel = dataSnapshot.getValue(UserModel.class);
                         if (userModel != null){
-                            isAuthenticate.setIsAuthenticate(userModel.getAdmin());
-                            isAdmin = userModel.getAdmin();
+                            fullName.setValue(userModel.getFullName());
+                            userIsAdmin.setValue(userModel.getAdmin());
                         }
                     }
                 });
-        return isAdmin;
-    }
-    public interface IsAuthenticate{
-        void setIsAuthenticate(boolean isAdmin);
     }
 }

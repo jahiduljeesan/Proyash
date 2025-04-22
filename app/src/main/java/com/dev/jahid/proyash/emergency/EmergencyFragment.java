@@ -13,7 +13,9 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -26,6 +28,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.dev.jahid.proyash.R;
+import com.dev.jahid.proyash.authentication.UserAuthentication;
 import com.dev.jahid.proyash.databinding.FragmentEmergencyBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -48,7 +51,6 @@ public class EmergencyFragment extends Fragment {
     private List<EmergencyModel> emergencyList = new ArrayList<>();
     private AlertDialog alertDialog;
     private ImageView btnDismiss;
-
     String name = "",title = "",phone = "",category = "";
 
     @Override
@@ -78,12 +80,8 @@ public class EmergencyFragment extends Fragment {
             emergencyAdapter.setEmergencyList(emergencyList);
         });
 
-        emergencyAdapter.setOnButtonClick(new EmergencyAdapter.OnButtonClick() {
-            @Override
-            public void onCallClick(String phone) {
-                startPhoneCall(phone);
-            }
-        });
+        emergencyAdapter.setOnButtonClick(phoneNumber-> startPhoneCall(phoneNumber));
+
         binding.chipGroup.setOnCheckedStateChangeListener(new ChipGroup.OnCheckedStateChangeListener() {
             @Override
             public void onCheckedChanged(@NonNull ChipGroup group, @NonNull List<Integer> checkedIds) {
@@ -112,20 +110,54 @@ public class EmergencyFragment extends Fragment {
             }
         });
 
-        binding.bnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().onBackPressed();
-            }
+        binding.bnBack.setOnClickListener(v -> getActivity().onBackPressed());
+
+        binding.btnAdd.setOnClickListener(v-> {
+                if (UserAuthentication.isAdmin){
+                    showDialog();
+                }else {
+                    Toast.makeText(requireContext(), "শুধুমাত্র এডমিন প্যানেলের জন্য।", Toast.LENGTH_SHORT).show();
+                }
         });
 
-        binding.btnAdd.setOnClickListener(new View.OnClickListener() {
+        // Swipe to delete setup
+      if (UserAuthentication.isAdmin) {
+          swipeToDelete();
+      }
+    }
+
+    private void swipeToDelete(){
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
-            public void onClick(View v) {
-                showDialog();
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false; // No move action
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                int position = viewHolder.getAdapterPosition();
+                EmergencyModel emergencyModel = emergencyList.get(position);
+
+                deleteEmergencyItem(emergencyModel, position);
             }
         });
+        itemTouchHelper.attachToRecyclerView(binding.emergencyListView);
     }
+
+    private void deleteEmergencyItem(EmergencyModel emergencyModel, int position) {
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = firebaseDatabase.getReference("EmergencyData");
+
+        String itemKey = emergencyModel.getKey();  // Assuming `EmergencyModel` has a `key` field that holds the Firebase reference ID
+
+        databaseReference.child(itemKey).removeValue().addOnSuccessListener(aVoid -> {
+            emergencyAdapter.notifyItemRemoved(position);
+            Toast.makeText(requireContext(), "Item deleted successfully.", Toast.LENGTH_SHORT).show();
+        }).addOnFailureListener(e -> {
+            Toast.makeText(requireContext(), "Failed to delete item.", Toast.LENGTH_SHORT).show();
+        });
+    }
+
 
     private void showDialog() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(requireContext());
@@ -167,7 +199,7 @@ public class EmergencyFragment extends Fragment {
         DatabaseReference databaseReference = firebaseDatabase.getReference("EmergencyData");
 
         String key = databaseReference.push().getKey();
-        EmergencyModel emergencyModel = new EmergencyModel(name,title,phone,category);
+        EmergencyModel emergencyModel = new EmergencyModel(name,title,phone,category,key);
         databaseReference.child(key).setValue(emergencyModel).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {

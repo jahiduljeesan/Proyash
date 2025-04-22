@@ -1,4 +1,4 @@
-package com.dev.jahid.proyash.notification;
+package com.dev.jahid.proyash.tools;
 
 import android.content.Context;
 import android.util.Log;

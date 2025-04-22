@@ -13,7 +13,6 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -64,6 +63,8 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.google.auth:google-auth-library-oauth2-http:1.5.3")
     implementation ("androidx.work:work-runtime:2.7.1")
+
+    implementation("com.google.android.gms:play-services-ads:23.5.0")
 
 
 }

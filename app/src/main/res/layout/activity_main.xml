@@ -8,7 +8,6 @@
     android:layout_height="match_parent"
     tools:context=".activity.MainActivity">
 
-    <!-- Main content area -->
     <FrameLayout
         android:id="@+id/homeFragmentContainer"
         android:layout_width="0dp"

@@ -122,7 +122,7 @@
         android:layout_marginTop="@dimen/_15sdp"
         android:layout_marginEnd="@dimen/_10sdp"
         app:endIconMode="clear_text"
-        app:layout_constraintBottom_toTopOf="@+id/btnPostSubmit"
+        app:layout_constraintBottom_toTopOf="@+id/btnSubmitE"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
